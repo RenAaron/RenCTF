@@ -11,6 +11,7 @@ const { getAuth } = require('firebase/auth');
 const { getFirestore, serverTimestamp } = require('firebase/firestore');
 const { doc, setDoc, onSnapshot, getDoc, updateDoc, collection, addDoc} = require('firebase/firestore');
 const { copyFileSync, access } = require("fs");
+import { firebaseConfig } from "./fake_env.js" // comment this out and replace below wit ur stuff
 
 const diffs = {
     E: "easy",
@@ -22,16 +23,6 @@ const ops = {
     "R": "B",
     "B": "R"
 }
-
-const firebaseConfig = {
-    apiKey: "AIzaSyBY4PmE2Fsl0dIzGoZ1ZDEYc1Wfd6L3LI0",
-    authDomain: "ren-ctf-webapp.firebaseapp.com",
-    projectId: "ren-ctf-webapp",
-    storageBucket: "ren-ctf-webapp.appspot.com",
-    messagingSenderId: "191118208644",
-    appId: "1:191118208644:web:3767bae6311f32510f1cd1",
-    measurementId: "G-7VBYFNJM47"
-};
 
 const app2 = initializeApp(firebaseConfig);
 const db = getFirestore(app2);

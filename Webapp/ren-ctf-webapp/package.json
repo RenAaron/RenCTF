@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "dompurify": "^3.3.0",
     "dotenv": "^17.3.1",
-    "firebase": "^10.12.2",
+    "firebase": "^10.14.1",
     "marked": "^16.2.1",
     "notenv": "^2.0.3",
     "path-browserify": "^1.0.1",
