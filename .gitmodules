@@ -1,0 +1,3 @@
+[submodule "stt-reasoning"]
+	path = stt-reasoning
+	url = https://github.com/KatsuNK/stt-reasoning.git

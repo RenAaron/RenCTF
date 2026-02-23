@@ -1,0 +1,510 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  font-size: 16px;
+  font-family: "Jersey 15", sans-serif;
+  background-color: #1c2c4c;
+}
+
+button,
+input {
+  cursor: pointer;
+}
+
+.App {
+  width: 100%;
+  min-height: 100vh;
+  background-image: linear-gradient(rgb(0, 0, 0), rgb(3, 0, 49));
+  color: #ffffff;
+  padding-top: 5vh;
+}
+
+.nav-bar {
+  padding: 1vh 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000000;
+  color: #ffffff;
+  height: 10vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.sign-in {
+  border: none;
+  background-color: transparent;
+}
+
+.welcome {
+  padding: 2vw;
+  text-align: center;
+  margin-top: 2.5vh;
+  color: #ffffff;
+}
+
+.welcome :is(h2, p, img) {
+  margin-bottom: 2vh;
+}
+
+.messages-wrapper {
+  padding: 1vh;
+  overflow: scroll;
+  width: 100%;
+  margin-bottom: 1vh;
+}
+
+.chat-bubble {
+  border-radius: 20px 20px 20px 0;
+  padding: 1.5vh;
+  background-color: #000000;
+  color: #ffffff;
+  width: max-content;
+  max-width: calc(100% - 5vw);
+  box-shadow: -2px 2px 1px 1px #0059ff;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 5vh;
+  min-width: 0;
+  gap: 0.5rem;
+}
+
+.chat-bubble.right {
+  margin-left: auto;
+  border-radius: 20px 20px 0 20px;
+  background-color: #000000;
+  box-shadow: -2px 2px 1px 1px #ff0073;
+}
+
+.chat-bubble__left {
+  width: 3.5vh;
+  height: 3.5vh;
+  border-radius: 50%;
+  margin-right: 1vw;
+}
+
+/* text wrapping */
+.message-text {
+  max-width: 100%;
+  overflow-wrap: anywhere;   /* modern; wraps very long strings/URLs */
+  word-break: break-word;    /* fallback for older engines */
+  word-wrap: break-word;     /* legacy fallback */
+  line-height: 1.2;
+}
+
+.message-text .softbreak {
+  display: block;
+  margin: 0.9rem 0; /* adjust spacing here */
+}
+
+/* code blocks — choose ONE of the two styles below */
+
+/* A) Wrap long code lines (no horizontal scroll) */
+.message-text pre,
+.message-text code {
+  white-space: pre-wrap;     /* preserve line breaks but allow wrap */
+  word-break: break-word;
+  overflow-x: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* nice-to-haves */
+.message-text pre {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(15, 23, 42, 0.06); /* subtle */
+}
+.message-text img {
+  max-width: 100%;
+  height: auto;
+}
+.message-text table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;          /* tables won’t blow out the width */
+}
+
+
+.user-name {
+  font-weight: bold;
+  margin-bottom: 0.5vh;
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  color: #ffffff;
+}
+
+
+.user-message {
+  /* word-break: break-all; */
+}
+
+.message-time {
+  display: block;
+  text-align: right;
+}
+
+.send-message {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 1vh 1vw;
+  background-color: #000000;
+  display: flex;
+}
+
+.send-message > input {
+  height: 5vh;
+  padding: 1vh 1vw;
+  border-radius: 5px 0 0 5px;
+  border: none;
+  flex-grow: 1;
+  background-color: rgb(0, 0, 0);
+  color: #ffffff;
+  font-size: 1rem;
+  font-family: "Jersey 15", sans-serif;
+}
+
+.send-message > input:placeholder {
+  color: #ddd;
+}
+
+.send-message > :is(input, button):focus {
+  outline: none;
+  border-bottom: 1px solid #000000;
+}
+
+.send-message > button {
+  width: 70px;
+  height: 5vh;
+  padding: 0.5vh 1vw;
+  border-radius: 0 5px 5px 0;
+  color: #ffffff;
+  border: 1px solid #303030;
+  background-color: #242424;
+  font-weight: 700;
+  font-family: "Jersey 15", sans-serif;
+}
+
+.pixel-art,
+.pixel-art-button,
+.pixel-art-exp {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transition: transform 0.3s ease;
+}
+
+.pixel-art-no-scale{
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.pixel-art:hover,
+.pixel-art-button:hover,
+.pixel-art-exp:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.logo {
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  margin-bottom: 4vh;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1.5vh 2vw;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background-color: #34495e;
+}
+
+.icon {
+  margin-right: 1vw;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+}
+
+.container {
+  display: flex;
+  height: 92.5vh;
+}
+
+.section-left {
+  width: 25vw; /* og 25 */ 
+  overflow: scroll;
+  background-image: linear-gradient(rgb(0, 0, 0), rgb(0, 5, 90));
+  transition: width 0.5s;
+}
+
+.section-right {
+  width: 25vw; /* og 25vw */ 
+  overflow: scroll;
+  background-image: linear-gradient(rgb(0, 0, 0), rgb(0, 3, 59));
+  transition: width 0.5s;
+}
+
+.section-right:hover {
+  width: 40vw; /* og 40vw */
+  /* cursor: pointer; */
+}
+.section-left:hover {
+  width: 40vw;
+  /* cursor: pointer; */
+}
+.section-middle {
+  width: 50vw;
+  background-image: linear-gradient(rgb(0, 0, 0), rgb(0, 15, 76));
+  transition: width 0.5s;
+}
+
+.chalHeader,
+.chalContent {
+  height: 10vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.chalTitle {
+  width: 10vw;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  padding: 10vh;
+}
+
+.circle-image {
+  border-radius: 50%;
+  object-fit: cover;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  border: 2px solid #ffffff;
+}
+
+challenges {
+  width: 33.33%;
+}
+
+.stats {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10vh;
+  align-items: center;
+}
+
+.hover-container {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-text {
+  visibility: hidden;
+  width: 20vw;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+  border: 2px dashed #00aeff;
+  border-radius: 5px;
+  padding: 0.5vh 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -10vw;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.hover-container:hover .hover-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  max-width: 100vw;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slides {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.slides img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 2vh;
+  margin-top: -2vh;
+  color: white;
+  font-weight: bold;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev {
+  left: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.text {
+  color: #f2f2f2;
+  font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+  padding: 0.8vh 1vw;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from { opacity: .4 }
+  to { opacity: 1 }
+}
+
+.video-wrapper {
+  position: relative;
+  width: 80%;
+  max-width: 800px;
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+}
+
+.video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+
+.video-slide {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tab {
+  overflow: hidden;
+  /* background-color: rgb(0, 0, 0);
+  border: solid white;
+  border-width: 1px; */
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  font-family: "Jersey 15", sans-serif;
+  color: white;
+  
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ff007b;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #0000ff;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  border-top: none;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+/* Style the close button */
+.topright {
+  float: right;
+  cursor: pointer;
+  font-size: 28px;
+}
+
+/* Go from zero to full opacity */
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.topright:hover {color: red;}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;                /* makes it thin */
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent; /* thumb + track */
+}
+
+/* Chrome, Edge, Safari */
+*::-webkit-scrollbar {
+  width: 8px;        /* scrollbar width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent; /* track background */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3); /* thumb color */
+  border-radius: 10px; /* rounded edges */
+  border: 2px solid transparent; /* gives spacing effect */
+}

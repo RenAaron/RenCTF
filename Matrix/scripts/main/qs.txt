@@ -1,0 +1,71 @@
+# we want to take the 8x8 grid right? and we wanna print the corresponding cells of the grid with a color pertaining to a dictionary right? That makes sense ? 
+
+chars = {
+    "B": ["""
+ ██╗ ██╗ 
+████████╗
+╚██╔═██╔╝
+████████╗
+╚██╔═██╔╝
+ ╚═╝ ╚═╝ 
+""", ["\033[34m", "\033[0m"]],
+    "R": ["""
+ ██████╗ 
+██╔═══██╗
+██║██╗██║
+██║██║██║
+╚█║████╔╝
+ ╚╝╚═══╝ 
+""", ["\033[31m","\033[0m"]],
+    "W": ["""
+         
+         
+         
+  ██╗    
+  ╚═╝    
+         
+""", ["\033[37m","\033[0m"]],
+    "P": ["""
+         
+         
+ █████╗  
+ ╚════╝  
+         
+         
+""", ["\033[35m","\033[0m"]],
+    " ": ["""
+         
+         
+         
+         
+         
+         
+""", ["\033[35m","\033[0m"]]
+}
+
+def convertRow(row):
+    new_row = ""
+    for i in range(6):
+        for x in row:
+            if(x in chars):
+                new_row += chars[x][1][0]
+                new_row += chars[x][0].splitlines()[i+1]
+                new_row += chars[x][1][1]
+                new_row += chars[" "][0].splitlines()[i+1]
+        new_row += "\n"        
+    return(new_row)
+
+def colorBoard(board):
+    
+    new_board = []
+    
+    for x in board:
+        row = convertRow(x)
+        new_board.append(row)
+
+    return new_board
+
+board = ["RBRWWBPP","BWBRBRWR","RBWBRWPP","WPPRBRBR","RBWBRBRW","WWBRBRBR","RBWWRPRB","WWBRBRPP"]
+
+for x in (colorBoard(board)):
+    print(x)
