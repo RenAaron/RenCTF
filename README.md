@@ -1,12 +1,12 @@
 # RenCTF
 
-RenCTF is a web application/hardware project intended to teach  through an interactive & team-based medium. We have a webapp that lets users interface with a virtual game board that has a whole LED Matrix that plays gifs, displays the virtual gameboard, and user-rankings and stats! 
+RenCTF is a web application/hardware project intended to teach STEM-related challenges through an interactive & team-based medium. We have a webapp that lets users interface with a virtual game board that has a whole LED Matrix that plays gifs, displays the virtual gameboard, and user-rankings and stats! 
 
 This material is based upon work supported by the National Science Foundation under Award No. 2344237 and No. 2245573. Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
 
 <p align="center">
-  <img src="media/RenCTF.png" alt="RenCTF Board" width="400"/>
-  <!-- <img src="media/RenCTF_back.png" alt="RenCTF Board" width="400"/> -->
+  <img src="docs/RenCTF.png" alt="RenCTF Board" width="400"/>
+  <img src="docs/RenCTF_back.png" alt="RenCTF Board Back" width="400"/>
 </p>
 
 ---
@@ -27,9 +27,8 @@ This material is based upon work supported by the National Science Foundation un
 
 
 
-## Installation
+## Setup!
 
-### Prerequisites
 1. Make sure you have these installed:
    - Node.js and npm
    - Angular CLI
