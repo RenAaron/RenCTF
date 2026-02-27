@@ -6,10 +6,7 @@ This material is based upon work supported by the National Science Foundation un
 
 <p align="center">
   <img src="docs/RenCTF.png" alt="RenCTF Board" width="400"/>
-</p>
-
-<p align="center">
-  <img src="docs/RenCTF_back.png" alt="RenCTF Board" width="400"/>
+  <img src="docs/RenCTF_back.png" alt="RenCTF Board back" width="400"/>
 </p>
 
 ---
