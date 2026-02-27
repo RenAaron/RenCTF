@@ -5,7 +5,8 @@ RenCTF is a web application/hardware project intended to teach  through an inter
 This material is based upon work supported by the National Science Foundation under Award No. 2344237 and No. 2245573. Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
 
 <p align="center">
-  <img src="media/RenCTF_Board.gif" alt="Irrig Prototype" width="400"/>
+  <img src="media/RenCTF.png" alt="RenCTF Board" width="400"/>
+  <img src="media/RenCTF_back.png" alt="RenCTF Board" width="400"/>
 </p>
 
 ---
