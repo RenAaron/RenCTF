@@ -8,3 +8,5 @@ db = firestore.client()
 doc_ref = db.collection("games").document("TIC-TAC-TOE")
 state_ref = db.collection("matrix_state").document("STATE")
 users_ref = db.collection("users")
+
+state = state_ref.get()
