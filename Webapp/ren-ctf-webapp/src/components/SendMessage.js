@@ -1,21 +1,8 @@
 import React, { useState } from "react";
 import { auth, db } from "../firebase";
-import { addDoc, collection, serverTimestamp, getDocs  } from "firebase/firestore";
+import { doc, addDoc, collection, serverTimestamp, getDoc, updateDoc } from "firebase/firestore";
+import Swal from 'sweetalert2'
 
-const keysCollectionRef = collection(db, "keys");
-
-async function getAllKeys() {
-  try {
-    const querySnapshot = await getDocs(keysCollectionRef);
-    const keysList = querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
-    return keysList;
-  } catch (error) {
-    console.error("Error getting documents: ", error);
-  }
-}
 
 const SendMessage = ({ scroll }) => {
   const [message, setMessage] = useState("");
@@ -25,61 +12,48 @@ const SendMessage = ({ scroll }) => {
     event.preventDefault(); // prevent page from refreshing 
 
     if (message.trim() === "") {
-      
       return;
     }
-    
-    if(message.startsWith("/guess")){
 
-      let guess = message.substring(7);
+    const { uid, displayName, photoURL } = auth.currentUser;
 
-      if(guess.trim() !== ""){
-        let keys = await getAllKeys();
-        let flags = keys.map(obj => obj.flag);
+    console.log(auth.currentUser);
 
-        if(flags.includes(guess)){
-          alert("Correct")
-        } else{
-          alert("Incorrect")
-        }
-        
-      } else{
-        alert("Enter a valid guess pls!");
-      }
+    const userRef = doc(db, "users", uid);
+    const userSnap = await getDoc(userRef);
 
-      setMessage("");
-      return;
-      
+    if('saw_notice' in userSnap.data()){
+      console.log("User has seen notice!")
+    } else{
+      Swal.fire({
+        icon: "info",
+        title: "Notice!",
+        iconColor: "#f803fc",
+        color: '#f803fc',
+        background: 'black',
+        text: "This feature is a work in progress! I collect limited chat interaction data to make this feature better over time. When I analyze usage trends, the data is aggregated and anonymized! By continuing, you acknowledge this notice.  -Ren",
+        showCloseButton: false,
+        confirmButtonColor: "#f803fc",
+        confirmButtonText: "👍"
+      });
+      await updateDoc(userRef, {
+      saw_notice: 1
+    });
     }
 
-    if(message.startsWith("/submit")){
 
-      let image = message.substring(8);
-
-      const { uid, displayName, photoURL } = auth.currentUser; 
-
-      await addDoc(collection(db, "images"), {
-        text: image,
+    if(true){
+      await addDoc(collection(db, "messages"), {
+        text: message,
         name: displayName,
         avatar: photoURL,
         createdAt: serverTimestamp(),
         uid,
       });
-
-      setMessage("");
     }
-    
-    const { uid, displayName, photoURL } = auth.currentUser; 
-
-    await addDoc(collection(db, "messages"), {
-      text: message,
-      name: displayName,
-      avatar: photoURL,
-      createdAt: serverTimestamp(),
-      uid,
-    });
 
     setMessage("");
+
     // scroll.current.scrollIntoView({ behavior: "smooth" });
   };
 

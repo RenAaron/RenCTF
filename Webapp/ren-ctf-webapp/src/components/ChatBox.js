@@ -6,49 +6,34 @@ import {
   onSnapshot,
   limit,
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { db, auth } from "../firebase";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../firebase";
 
 const ChatBox = () => {
-
   const [user] = useAuthState(auth);
-
   const [messages, setMessages] = useState([]);
-  
-  const scroll = useRef();
+  const scroll = useRef(null);
 
   useEffect(() => {
-    
-    if (!user) return; 
+    if (!user) return;
 
     const q = query(
-      collection(db, 'messages'),
-      orderBy('createdAt', 'desc'),
-      limit(30)
+      collection(db, "messages"),
+      orderBy("createdAt", "desc"),
+      limit(20)
     );
 
-    const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
-
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const fetchedMessages = [];
-      const filteredMessages = [];
-      
 
-      QuerySnapshot.forEach((doc) => {
+      querySnapshot.forEach((doc) => {
         const data = doc.data();
         if (data.uid === user.uid) {
-
           fetchedMessages.push({ ...data, id: doc.id });
         }
       });
-
-      for (let i = fetchedMessages.length - 1; i > 0; i--) {
-        if(fetchedMessages[i].uid == user.uid){
-          filteredMessages.push(fetchedMessages[i]);
-        }
-      }
 
       const sortedMessages = fetchedMessages.sort(
         (a, b) => a.createdAt - b.createdAt
@@ -56,22 +41,22 @@ const ChatBox = () => {
 
       setMessages(sortedMessages);
 
-      scroll.current.scrollIntoView({ behavior: "smooth" });
-
+      if (scroll.current) {
+        scroll.current.scrollIntoView({ behavior: "smooth" });
+      }
     });
 
-    return () => unsubscribe;
-
-  }, []);
+    return () => unsubscribe();
+  }, [user]);
 
   return (
     <main>
       <div className="messages-wrapper">
-        {messages?.map((message) => (
+        {messages.map((message) => (
           <Message key={message.id} message={message} />
         ))}
       </div>
-      {/* when a new message enters the chat, the screen scrolls down to the scroll div */}
+
       <span ref={scroll}></span>
       <SendMessage scroll={scroll} />
     </main>
