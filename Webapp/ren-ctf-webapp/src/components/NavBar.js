@@ -41,24 +41,23 @@ const NavBar = () => {
 
   return (
     <nav className="nav-bar">
+
       <div style ={{justifyContent: "center", alignItems: 'center'}}>
-        <a href="https://github.com/RenAaron/RENCTF_PUBLIC" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/RenAaron/RenCTF" target="_blank" rel="noopener noreferrer">
           <img src="icons/Github.gif" alt="Pixel Art" class="pixel-art" width="60" height="60"/>
         </a>
         <a href="https://discord.gg/wuUxEZgmSj" target="_blank" rel="noopener noreferrer">
           <img src="icons/Discord.gif" alt="Pixel Art" class="pixel-art" width="60" height="60"/>
         </a>
 
-        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2245573&HistoricalAwards=false" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2344237&HistoricalAwards=false" target="_blank" rel="noopener noreferrer">
           <img src="icons/nsf.gif" alt="Pixel Art" class="pixel-art" width="60" height="60"/>
         </a>
       </div>
       
 
       <div style ={{justifyContent: "center", alignItems: 'center', display: "flex"}}>
-        {/* <img src="icons/parts.gif" alt="Pixel Art" class="pixel-art" width={70} height={70}/> */}
         <img src="icons/RenCTF.gif" alt="Pixel Art" class="pixel-art" height={80}/>
-        {/* <img src="icons/parts.gif" alt="Pixel Art" class="pixel-art" width={70} height={70}/> */}
       </div>
 
       {user ? (

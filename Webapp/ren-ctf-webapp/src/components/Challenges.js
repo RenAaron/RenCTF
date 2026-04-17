@@ -190,7 +190,7 @@ const Challenges = () => {
   return (
     <main style={{ width: '100%', height: '100%', display: "flex",  alignItems: "center", flexDirection: 'column'}}>
 
-      <div style={{height: '10%', justifyContent: "center", width: '100%', alignItems: "center", display: "flex", marginTop: '30px', justifyContent: 'center'}}>
+      <div style={{height: '10%', justifyContent: "center", width: '100%', alignItems: "center", display: "flex", justifyContent: 'center'}}>
         <h2 style ={{fontSize: 50, marginRight: '10px'}}>Challenges </h2>
         <h2 style={{color: '#ff1c77', fontSize: 40}}> ( Week ? April )</h2>
       </div>

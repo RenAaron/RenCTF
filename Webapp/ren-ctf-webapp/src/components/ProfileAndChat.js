@@ -25,7 +25,7 @@ const ProfileAndChat = () => {
 
   return (
     <main>
-      <div style={{height: '10%', justifyContent: "center", width: '100%', alignItems: "center", display: "flex", marginTop: '30px', justifyContent: 'center'}}>
+      <div style={{height: '10%', justifyContent: "center", width: '100%', alignItems: "center", display: "flex", justifyContent: 'center'}}>
         <h2 style ={{fontSize: 50, marginRight: '10px'}}> Activity </h2>
       </div>
 

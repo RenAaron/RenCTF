@@ -24,7 +24,6 @@ input {
   min-height: 100vh;
   background-image: linear-gradient(rgb(0, 0, 0), rgb(3, 0, 49));
   color: #ffffff;
-  padding-top: 5vh;
 }
 
 .nav-bar {
@@ -35,7 +34,7 @@ input {
   background-color: #000000;
   color: #ffffff;
   height: 10vh;
-  position: fixed;
+  /* position: fixed; */
   left: 0;
   top: 0;
   width: 100%;
@@ -243,8 +242,8 @@ input {
 }
 
 .container {
-  display: flex;
-  height: 92.5vh;
+  display: flex;  
+  height: 90vh;
 }
 
 .section-left {

@@ -31,7 +31,7 @@ const SendMessage = ({ scroll }) => {
         iconColor: "#f803fc",
         color: '#f803fc',
         background: 'black',
-        text: "This feature is a work in progress! I collect limited chat interaction data to make this feature better over time. When I analyze usage trends, the data is aggregated and anonymized! By continuing, you acknowledge this notice.  -Ren",
+        text: "This feature is a work in progress. To help us improve this feature, we may collect limited usage data when you interact in this chat. We may use this information in aggregated and anonymized form for reporting, analysis, and research publications, in ways designed to protect your privacy. By continuing, you acknowledge this notice.",
         showCloseButton: false,
         confirmButtonColor: "#f803fc",
         confirmButtonText: "👍"

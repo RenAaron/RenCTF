@@ -10,12 +10,10 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
-      {/* <div className="main-content"> */}
+      <NavBar/>
 
-      {/* <Sidebar /> */}
 
-        <div className="center-cont">
+        <div>
             {!user ? (
               <Welcome />
               ) : (

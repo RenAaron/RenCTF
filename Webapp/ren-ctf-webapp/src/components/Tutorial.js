@@ -5,20 +5,21 @@ const Tutorial = () => {
 
   const slides = [
     {
+      type: "video",
+      src: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      caption: "Tutorial video as always!"
+    },
+    {
       type: "image",
       src: "/icons/NOVAWARD.gif",
-      caption: "Hello! Ok so we lowkey DONT have the tshirts yet so im giving away this coffee machine i STOLE from my last co-op to whomever wins first place this month. If you have any questions ask on the Discord. Updates for this week on next slide ➡️➡️➡️➡️"
+      caption: "We have tshirts now!"
     },
     {
       type: "image",
       src: "/icons/Skull.gif", // Replace with your desired video URL
       caption: "UPDATES!! Account creation has been restricted to RIT domain emails ONLY‼️ No cheesing the game board anymore >:[ ~ I animated new gifs for red and blue tiles AND we have this dope console to track who completed what and when! Challenges will go up periodically this week! Last week's game miraculously ended in a 32 to 32 tie between Red and Blue Team! "
-    },
-    {
-      type: "video",
-      src: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      caption: "Tutorial video as always!"
     }
+    
   ];
 
   const showSlides = (n) => {
