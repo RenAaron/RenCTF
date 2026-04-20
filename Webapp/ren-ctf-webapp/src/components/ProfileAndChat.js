@@ -24,12 +24,12 @@ const ProfileAndChat = () => {
   }, []);
 
   return (
-    <main>
+    <main  style={{height: '100%'}}>
       <div style={{height: '10%', justifyContent: "center", width: '100%', alignItems: "center", display: "flex", justifyContent: 'center'}}>
         <h2 style ={{fontSize: 50, marginRight: '10px'}}> Activity </h2>
       </div>
 
-      <div>
+      <div style={{height: "90%"}}>
         <div class="tab">
           <button className="tablinks" onClick={(e) => openCity(e, 'Console')} id="defaultOpen">📟 Console</button>
           <button className="tablinks" onClick={(e) => openCity(e, 'Chat')}>💬 Chat</button>
@@ -38,12 +38,10 @@ const ProfileAndChat = () => {
 
         
         <div id="Console" class="tabcontent">
-          {/* <div class="section section-left"><Profile/></div> */}
-          <div><Console/></div>
+          <Console/>
         </div>
 
         <div id="Chat" class="tabcontent">
-            {/* <div class="section section-left"><ChatBox/></div> */}
             <div><ChatBox/></div>
         </div>
 
