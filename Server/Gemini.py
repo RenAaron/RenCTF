@@ -99,7 +99,7 @@ while(0):
 
 recent_query = db.collection("messages")\
                  .order_by("createdAt", direction=firestore.Query.DESCENDING)\
-                 .limit(1)
+                 .limit(10)
 
 def on_snapshot(col_snapshot, changes, read_time):
     print("\n--- Collection Updated ---")

@@ -13,9 +13,10 @@ import { db, auth } from "../firebase";
 import io from 'socket.io-client';
 import Leaderboard from "./Leaderboard"
 import Swal from 'sweetalert2'
+import Tutorial from "./Tutorial";
 
-const socket = io.connect("https://renctf-server-bbb0e859baa9.herokuapp.com/");
-// const socket = io.connect("http://localhost:3001");
+// const socket = io.connect("https://renctf-server-bbb0e859baa9.herokuapp.com/");
+const socket = io.connect("http://localhost:3001");
 
 const keysCollectionRef = collection(db, "keys");
 
@@ -66,7 +67,7 @@ const Grid = ({ array, team, moves}) => {
             src= {colors[cell] || "/icons/Q.gif"}
             width={35}
             height={35}
-            style={{ border: cellC[cell]}}
+            style={{ border: cellC[cell], backgroundColor: '#ffffff00'}}
           />
         ))
       ))}

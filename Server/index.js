@@ -8,10 +8,11 @@ const cors = require("cors");
 
 const { initializeApp } = require('firebase/app');
 const { getAuth } = require('firebase/auth');
-const { getFirestore, serverTimestamp } = require('firebase/firestore');
-const { doc, setDoc, onSnapshot, getDoc, updateDoc, collection, addDoc} = require('firebase/firestore');
+const { getFirestore, serverTimestamp, runTransaction } = require('firebase/firestore');
+const { doc, setDoc, onSnapshot, getDoc, updateDoc, collection, addDoc, arrayUnion} = require('firebase/firestore');
 const { copyFileSync, access } = require("fs");
-import { firebaseConfig } from "./fake_env.js" // comment this out and replace below wit ur stuff
+
+const { firebaseConfig } = require("./fake_env.js") // comment this out and replace below wit ur stuff
 
 const diffs = {
     E: "easy",
@@ -26,7 +27,7 @@ const ops = {
 
 const app2 = initializeApp(firebaseConfig);
 const db = getFirestore(app2);
-const docRef = doc(db, "games", "TIC-TAC-TOE");
+const game_ref = doc(db, "games", "TIC-TAC-TOE");
 
 String.prototype.replaceAt = function(index, replacement) {
     return this.substring(0, index) + replacement + this.substring(index + replacement.length);
@@ -231,7 +232,7 @@ async function addChal(data){
 async function getBoard() {
     
     try {
-        const docSnap = await getDoc(docRef);
+        const docSnap = await getDoc(game_ref);
 
         if (docSnap.exists()) {
             return docSnap.data().board;
@@ -290,24 +291,35 @@ async function getAffectedCells(board, data, userSnap){
 }
 
 async function updateCount(board){
-    red = 0
-    blue = 0 
+    red_count = 0
+    blue_count = 0 
     for(i in board){
         for(j in board[i]){
             if(board[i][j] == "R"){
-                red += 1;
+                red_count += 1;
             } else if(board[i][j] == "B"){
-                blue += 1
+                blue_count += 1
             }
         }
     }
-    updateDoc(docRef, {
-        BlueScore: blue,
-        RedScore: red,
+    updateDoc(game_ref, {
+        BlueScore: blue_count,
+        RedScore: red_count, // okay yeah the variable naming convention I cycle between is kinda terrible I know  
         multiplier: getTimeScore()
     })
 
-    console.log(getTimeScore()); 
+    
+    runTransaction(db, async (tx) => {
+        const snap = await tx.get(game_ref);
+        const data = snap.data() ?? {};
+
+        tx.update(game_ref, {
+            red_trace: [...(data.red_trace ?? []), red_count],
+            blue_trace: [...(data.blue_trace ?? []), blue_count],
+        });
+    });
+
+    // console.log(getTimeScore()); 
 
 }
 
@@ -344,8 +356,6 @@ async function setBoard(board, data){
     
     const userRef = doc(db, "users", data.user.uid);
     const userSnap = await getDoc(userRef);
-    
-    
 
 
     if((board[data.y][data.x] == "P")){
@@ -365,7 +375,7 @@ async function setBoard(board, data){
             }
 
             setPossible(board).then(updatedMoves => {
-                updateDoc(docRef, {
+                updateDoc(game_ref, {
                     board: updatedMoves
                 });
                 updateCount(newBoard);
@@ -397,7 +407,7 @@ app.get('/', function (req, res) {
 io.on("connection", (socket) => {
     
     socket.on("place_cell", (data) => {
-        console.log(data)
+        // console.log(data)
         getBoard().then(board => {
             if(board !== null && (data.moves > 0)){
                 setBoard(board, data);

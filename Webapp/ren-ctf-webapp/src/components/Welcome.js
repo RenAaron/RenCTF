@@ -5,7 +5,8 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 import io from 'socket.io-client';
 
-const socket = io.connect("https://renctf-server-bbb0e859baa9.herokuapp.com/");
+// const socket = io.connect("https://renctf-server-bbb0e859baa9.herokuapp.com/");
+const socket = io.connect("http://localhost:3001")
 
 const Welcome = () => {
   const googleSignIn = () => {
