@@ -40,17 +40,15 @@ const ShopItem = ({ image, description }) => {
 
   return (
     <div>
-        <div style ={{marginTop: "20px", fontSize: 19, justifyContent: "center", display: "flex", alignItems: "center", color: "#ffffffff"}}>
-            <img src={image} class="pixel-art" width={60} height={60} style={{marginRight: "20px", borderRadius: "5%", backgroundColor: "#000000ff", borderStyle: "double", borderColor: "#2100c9ff"}}/>
-            <MarkdownText text={ description } />
+        <div className="shop-item-row">
+            <img src={image} className="pixel-art shop-item-img" width={60} height={60}/>
+            <MarkdownText text={description} />
         </div>
 
         {/* <button style={{backgroundColor: "black", borderRadius: "5%", color: "white"}}> Buy </button> */}
 
-        <hr style={{color: "#181880ff", marginTop: "20px"}}></hr>
-        
+        <hr className="shop-item-divider"/>
     </div>
-    
   );
 };
 

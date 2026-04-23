@@ -24,36 +24,30 @@ const ProfileAndChat = () => {
   }, []);
 
   return (
-    <main  style={{height: '100%'}}>
-      <div style={{height: '10%', justifyContent: "center", width: '100%', alignItems: "center", display: "flex", justifyContent: 'center'}}>
-        <h2 style ={{fontSize: 50, marginRight: '10px'}}> Activity </h2>
+    <main className="activity-main">
+      <div className="section-header">
+        <h2 className="section-title"> Activity </h2>
       </div>
 
-      <div style={{height: "90%"}}>
-        <div class="tab">
+      <div className="section-body">
+        <div className="tab">
           <button className="tablinks" onClick={(e) => openCity(e, 'Console')} id="defaultOpen">📟 Console</button>
           <button className="tablinks" onClick={(e) => openCity(e, 'Chat')}>💬 Chat</button>
           <button className="tablinks" onClick={(e) => openCity(e, 'Shop')}>✨ Shop (WIP)</button>
         </div>
 
-        
-        <div id="Console" class="tabcontent">
+        <div id="Console" className="tabcontent">
           <Console/>
         </div>
 
-        <div id="Chat" class="tabcontent">
-            <div><ChatBox/></div>
+        <div id="Chat" className="tabcontent">
+          <div><ChatBox/></div>
         </div>
 
-        <div id="Shop" class="tabcontent">
-            <div><Shop/></div>
+        <div id="Shop" className="tabcontent">
+          <div><Shop/></div>
         </div>
-
       </div>
-      
-
-     
-      
     </main>
   );
 };

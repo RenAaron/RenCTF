@@ -509,3 +509,312 @@ challenges {
   border-radius: 10px; /* rounded edges */
   border: 2px solid transparent; /* gives spacing effect */
 }
+
+/* ── Shared section layout ──────────────────────────────────────── */
+.section-header {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-title {
+  font-size: 50px;
+  margin-right: 10px;
+}
+
+.section-body {
+  height: 90%;
+}
+
+/* ── NavBar ─────────────────────────────────────────────────────── */
+.nav-icons {
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-in-icon {
+  margin-right: 20px;
+}
+
+/* ── Welcome ────────────────────────────────────────────────────── */
+.welcome h1 {
+  margin-bottom: 10px;
+}
+
+.welcome-rit-notice {
+  color: #ff6a00;
+}
+
+/* ── Tutorial ───────────────────────────────────────────────────── */
+.tutorial-main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tutorial-chart {
+  width: 100%;
+  max-width: 600px;
+  color: white;
+}
+
+/* ── Challenges ─────────────────────────────────────────────────── */
+.chal-main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.chal-subtitle {
+  color: #ff1c77;
+  font-size: 40px;
+}
+
+.chal-board-section {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.chal-leaderboard-box {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  background-color: black;
+  border: 1px dashed #ffffff;
+  flex-direction: column;
+}
+
+.chal-leaderboard-title {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px dashed #ffffff;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chal-leaderboard-scroll {
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.chal-game-area {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.chal-score-row {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.team-label {
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-blue {
+  color: #00aeff;
+}
+
+.team-red {
+  color: #ff2200;
+}
+
+.text-white {
+  color: white;
+}
+
+.chal-moves-row {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.chal-warning {
+  font-size: 40px;
+  color: #ff7300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chal-multiplier {
+  font-size: 15px;
+  color: #00ff62;
+}
+
+.chal-challenges-row {
+  width: 100%;
+  height: 40%;
+  display: flex;
+}
+
+.chal-col {
+  width: 33.33%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.chal-input-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chal-form {
+  width: 70%;
+  margin-right: 10px;
+}
+
+.chal-flag-input {
+  text-align: center;
+  width: 100%;
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+  border: none;
+  height: 20px;
+  font-family: "Jersey 15", sans-serif;
+}
+
+.chal-desc {
+  height: 20%;
+  width: 90%;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.chal-hint-label {
+  color: #aa75ff;
+}
+
+.moves-easy {
+  color: #88ff00;
+}
+
+.moves-medium {
+  color: #ff8c00;
+}
+
+.moves-hard {
+  color: #ff0037;
+}
+
+.grid-container {
+  display: grid;
+  gap: 0;
+  background-color: black;
+}
+
+.grid-cell {
+  background-color: transparent;
+}
+
+/* ── ProfileAndChat ─────────────────────────────────────────────── */
+.activity-main {
+  height: 100%;
+}
+
+/* ── Leaderboard ────────────────────────────────────────────────── */
+.leaderboard-main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── User ───────────────────────────────────────────────────────── */
+.user-row {
+  display: flex;
+  align-items: center;
+}
+
+.user-stat {
+  font-size: 19px;
+}
+
+.user-display-name {
+  padding-right: 2px;
+  font-size: 19px;
+}
+
+.color-blue {
+  color: #00aeff;
+}
+
+.color-green {
+  color: #00ff7b;
+}
+
+.color-orange {
+  color: #fc9003;
+}
+
+.color-pink {
+  color: #ff1c77;
+}
+
+/* ── ConsoleMessage ─────────────────────────────────────────────── */
+.console-message {
+  font-size: 20px;
+}
+
+.console-timestamp {
+  font-size: 15px;
+  opacity: 0.3;
+}
+
+/* ── ShopItem ───────────────────────────────────────────────────── */
+.shop-item-row {
+  margin-top: 20px;
+  font-size: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+
+.shop-item-img {
+  margin-right: 20px;
+  border-radius: 5%;
+  background-color: #000000;
+  border: 3px double #2100c9;
+}
+
+.shop-item-divider {
+  color: #181880;
+  margin-top: 20px;
+}

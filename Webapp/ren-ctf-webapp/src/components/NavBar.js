@@ -8,7 +8,6 @@ import io from 'socket.io-client';
 
 // const socket = io.connect("https://renctf-server-bbb0e859baa9.herokuapp.com/");
 const socket = io.connect("http://localhost:3001")
- 
 
 // const socket = io("wss://renctf-webapp-server.glitch.me/", {
 //   headers: {
@@ -38,57 +37,48 @@ const NavBar = () => {
     var win = window.open(url, '_blank');
     win.focus();
   }
-  
 
   return (
     <nav className="nav-bar">
 
-      <div style ={{justifyContent: "center", alignItems: 'center'}}>
+      <div className="nav-icons">
         <a href="https://github.com/RenAaron/RenCTF" target="_blank" rel="noopener noreferrer">
-          <img src="icons/Github.gif" alt="Pixel Art" class="pixel-art" width="60" height="60"/>
+          <img src="icons/Github.gif" alt="Pixel Art" className="pixel-art" width="60" height="60"/>
         </a>
         <a href="https://discord.gg/wuUxEZgmSj" target="_blank" rel="noopener noreferrer">
-          <img src="icons/Discord.gif" alt="Pixel Art" class="pixel-art" width="60" height="60"/>
+          <img src="icons/Discord.gif" alt="Pixel Art" className="pixel-art" width="60" height="60"/>
         </a>
-
         <a href="https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2344237&HistoricalAwards=false" target="_blank" rel="noopener noreferrer">
-          <img src="icons/nsf.gif" alt="Pixel Art" class="pixel-art" width="60" height="60"/>
+          <img src="icons/nsf.gif" alt="Pixel Art" className="pixel-art" width="60" height="60"/>
         </a>
       </div>
-      
 
-      <div style ={{justifyContent: "center", alignItems: 'center', display: "flex"}}>
-        <img src="icons/RenCTF.gif" alt="Pixel Art" class="pixel-art" height={80}/>
+      <div className="nav-logo">
+        <img src="icons/RenCTF.gif" alt="Pixel Art" className="pixel-art" height={80}/>
       </div>
 
       {user ? (
-          
-          <button className="sign-in">
-            <img
-              alt="Pixel Art" 
-              class="pixel-art"
-              onClick={signOut}
-              src="/icons/Out.gif"
-              type="button"
-              style = {{marginRight: 20}}
-              width={40} height={40}
-            />
-          </button>
-        
-      ) : (
-        
-      
         <button className="sign-in">
-            <img
-              alt="Pixel Art" 
-              class="pixel-art"
-              onClick={googleSignIn}
-              src="/icons/Google.gif"
-              type="button"
-              style = {{marginRight: 20}}
-              width={100} height={40}
-            />
-          </button>
+          <img
+            alt="Pixel Art"
+            className="pixel-art sign-in-icon"
+            onClick={signOut}
+            src="/icons/Out.gif"
+            type="button"
+            width={40} height={40}
+          />
+        </button>
+      ) : (
+        <button className="sign-in">
+          <img
+            alt="Pixel Art"
+            className="pixel-art sign-in-icon"
+            onClick={googleSignIn}
+            src="/icons/Google.gif"
+            type="button"
+            width={100} height={40}
+          />
+        </button>
       )}
     </nav>
   );

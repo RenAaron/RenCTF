@@ -43,14 +43,12 @@ const ConsoleMessage = ({ message }) => {
     message.uid === user?.uid && message.name === user?.displayName;
 
   return (
-    <div style ={{fontSize: 20}}>
-      
-      <MarkdownText text={ message.text} />
+    <div className="console-message">
+      <MarkdownText text={message.text} />
 
-      <div style ={{fontSize: 15, opacity: 0.3}}>
-        <MarkdownText text={ (message.createdAt.toDate()).toString()} />
+      <div className="console-timestamp">
+        <MarkdownText text={(message.createdAt.toDate()).toString()} />
       </div>
-      
     </div>
   );
 };

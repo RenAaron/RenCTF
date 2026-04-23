@@ -5,7 +5,7 @@ import {
   orderBy,
   onSnapshot,
   limit,
-  doc, 
+  doc,
   getDocs,
   getDoc
 } from "firebase/firestore";
@@ -53,21 +53,20 @@ const Grid = ({ array, team, moves}) => {
         confirmButtonText: "Ok :)"
       });
     }
-    
   };
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${gridSize}, 35px)`, gridGap: '0px', backgroundColor: 'black'}}>
+    <div className="grid-container" style={{ gridTemplateColumns: `repeat(${gridSize}, 35px)` }}>
       {array.map((row, rowIndex) => (
         row.split('').map((cell, cellIndex) => (
           <img
             onClick={() => placeCell(rowIndex, cellIndex, team, moves)}
             key={`${rowIndex}-${cellIndex}`}
-            class="pixel-art"
-            src= {colors[cell] || "/icons/Q.gif"}
+            className="pixel-art grid-cell"
+            src={colors[cell] || "/icons/Q.gif"}
             width={35}
             height={35}
-            style={{ border: cellC[cell], backgroundColor: '#ffffff00'}}
+            style={{ border: cellC[cell] }}
           />
         ))
       ))}
@@ -80,7 +79,7 @@ const Challenges = () => {
   function openInNewTab(url) {
     var win = window.open(url, '_blank');
     win.focus();
-}
+  }
 
   async function openChal(diff) {
     try {
@@ -100,8 +99,8 @@ const Challenges = () => {
 
   const sendGuess = async (event, diff, id) => {
 
-    event.preventDefault(); // prevent page from refreshing 
-    
+    event.preventDefault(); // prevent page from refreshing
+
     try {
         const docRef = doc(db, "flags", diff);
         const docSnap = await getDoc(docRef);
@@ -137,7 +136,7 @@ const Challenges = () => {
           });
           // socket.emit("signed_in", auth.currentUser);
         }
-        
+
       } else{
         console.log("Could not find game", diff);
       }
@@ -185,144 +184,125 @@ const Challenges = () => {
     });
   }, []);
 
-
-  
-
   return (
-    <main style={{ width: '100%', height: '100%', display: "flex",  alignItems: "center", flexDirection: 'column'}}>
+    <main className="chal-main">
 
-      <div style={{height: '10%', justifyContent: "center", width: '100%', alignItems: "center", display: "flex", justifyContent: 'center'}}>
-        <h2 style ={{fontSize: 50, marginRight: '10px'}}>Challenges </h2>
-        <h2 style={{color: '#ff1c77', fontSize: 40}}> ( Week ? April )</h2>
+      <div className="section-header">
+        <h2 className="section-title">Challenges </h2>
+        <h2 className="chal-subtitle"> ( Week ? April )</h2>
       </div>
 
-      <div style={{width: '100%', height: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '20px', paddingBottom: '20px' }}>
-        <div style={{width: '35%', height: '100%', display: "flex", backgroundColor: 'black',border: '1px dashed #ffffff', flexDirection: 'column'}}>
-          <h2 style={{width: '100%', justifyContent: 'center', textAlign: 'center', borderColor: 'white', borderBottom: '1px dashed #ffffff', height: '10%'}}>Leaderboard</h2>
-          <div style ={{flexDirection: 'column', overflow: 'scroll'}}><Leaderboard/></div>
+      <div className="chal-board-section">
+        <div className="chal-leaderboard-box">
+          <h2 className="chal-leaderboard-title">Leaderboard</h2>
+          <div className="chal-leaderboard-scroll"><Leaderboard/></div>
         </div>
-        <div style={{width: '50%', height: '100%', justifyContent: 'center', alignItems: 'center', display: "flex", flexDirection: 'column'}}>
+        <div className="chal-game-area">
 
-
-          <div style={{ width: '90%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '5px'}}>
-            <t style={{fontSize: '26px', color:'#00aeff', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-              BLUE TEAM: <t style={{color:'white'}}>&nbsp;{BlueScore}</t>
+          <div className="chal-score-row">
+            <t className="team-label team-blue">
+              BLUE TEAM: <t className="text-white">&nbsp;{BlueScore}</t>
               &nbsp;
               {RedScore <= BlueScore && (
-                <img src="/icons/CBlue.gif" alt="Pixel Art" class="pixel-art" width={26} height={26}/>
+                <img src="/icons/CBlue.gif" alt="Pixel Art" className="pixel-art" width={26} height={26}/>
               )}
             </t>
 
-            <t style={{fontSize: '26px', color:'#ff2200', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-              RED TEAM: <t style={{color:'white'}}>&nbsp;{RedScore}</t>
+            <t className="team-label team-red">
+              RED TEAM: <t className="text-white">&nbsp;{RedScore}</t>
               &nbsp;
               {RedScore >= BlueScore && (
-                <img src="/icons/CRed.gif" alt="Pixel Art" class="pixel-art" width={26} height={26}/>
+                <img src="/icons/CRed.gif" alt="Pixel Art" className="pixel-art" width={26} height={26}/>
               )}
             </t>
           </div>
 
-          <Grid array={board} team={team} moves={moves} style={{backgroundColor: 'white', width: '50%', justifyContent: 'center'}}/>
+          <Grid array={board} team={team} moves={moves}/>
 
-          <div style={{ width: '70%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '5px'}}>
-            
+          <div className="chal-moves-row">
 
             {team == "Red" && (
-              <t style={{fontSize: '26px', color:'#ff2200', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-              YOUR MOVES: &nbsp;<t style={{color: 'white'}}>{moves}</t>
-              &nbsp;
-              <img src="/icons/Red.gif" alt="Pixel Art" class="pixel-art" width={25} height={25}/>
-
+              <t className="team-label team-red">
+                YOUR MOVES: &nbsp;<t className="text-white">{moves}</t>
+                &nbsp;
+                <img src="/icons/Red.gif" alt="Pixel Art" className="pixel-art" width={25} height={25}/>
               </t>
             )}
 
             {team == "Blue" && (
-              <t style={{fontSize: '26px', color:'#00aeff', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-              YOUR MOVES: &nbsp;<t style={{color: 'white'}}>{moves}</t>
-              &nbsp;
-              <img src="/icons/Blue.gif" alt="Pixel Art" class="pixel-art" width={25} height={25}/>
-
+              <t className="team-label team-blue">
+                YOUR MOVES: &nbsp;<t className="text-white">{moves}</t>
+                &nbsp;
+                <img src="/icons/Blue.gif" alt="Pixel Art" className="pixel-art" width={25} height={25}/>
               </t>
-
-              
             )}
 
-            
-
             {(team != "Blue" && team != "Red") && (
-              <t style={{fontSize: '40px', color:'#ff7300ff', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+              <t className="chal-warning">
                 USE YOUR RIT EMAIL! SIGN OUT AND SIGN BACK IN!
               </t>
             )}
 
-              
-            
           </div>
-          
-          <div style={{fontSize: '15px', color:'#00ff62ff'}}>
+
+          <div className="chal-multiplier">
             <t>CURRENT MULTIPLIER: </t>{multiplier}<t>x!</t>
           </div>
         </div>
 
-        
         {/* <button onClick={sendMessage}>Hello</button> */}
       </div>
 
-      <div style={{width: '100%', height: '40%', display: 'flex'}}>
-        <div style={{width: '33.33%', display: "flex",  alignItems: "center", flexDirection: 'column', paddingTop: '10px'}}> 
-          <img src="/icons/Easy.gif" alt="Pixel Art" class="pixel-art-button" width={200} height= 'auto' onClick={() => openChal('easy')}/>
+      <div className="chal-challenges-row">
+        <div className="chal-col">
+          <img src="/icons/Easy.gif" alt="Pixel Art" className="pixel-art-button" width={200} height='auto' onClick={() => openChal('easy')}/>
 
-          <div style = {{width: '100%', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
-
-            <form onSubmit={(event) => sendGuess(event, "easy", "guess_easy")} style={{width: '70%', marginRight: '10px'}}>
-              <input id = "guess_easy" placeholder="Paste Flag..." style ={{textAlign: 'center', width: '100%', color: 'white', backgroundColor: 'black', borderRadius: '5px', border: '0px', height: '20px', fontFamily: '"Jersey 15", sans-serif'}}/>
+          <div className="chal-input-row">
+            <form onSubmit={(event) => sendGuess(event, "easy", "guess_easy")} className="chal-form">
+              <input id="guess_easy" placeholder="Paste Flag..." className="chal-flag-input"/>
             </form>
-
-            <img src="/icons/EEas.gif" alt="Pixel Art" class="pixel-art-button" width={30} height= 'auto' onClick={(event) => sendGuess(event, "easy", "guess_easy")}/>
+            <img src="/icons/EEas.gif" alt="Pixel Art" className="pixel-art-button" width={30} height='auto' onClick={(event) => sendGuess(event, "easy", "guess_easy")}/>
           </div>
 
-          <div style ={{height: '20%', width: '90%', textAlign: 'center', paddingTop: '10px'}}>
-            <t style = {{color: '#aa75ff'}}>Challenge Hint:</t> {descEasy} <br></br><br></br>
-            Grants  <t style = {{color: '#88ff00'}}> +1 moves!</t>
+          <div className="chal-desc">
+            <t className="chal-hint-label">Challenge Hint:</t> {descEasy} <br/><br/>
+            Grants <t className="moves-easy"> +1 moves!</t>
           </div>
-
         </div>
 
-        <div style={{width: '33.33%', display: "flex",  alignItems: "center", flexDirection: 'column', paddingTop: '10px'}}> 
-          <img src="/icons/Mid.gif" alt="Pixel Art" class="pixel-art-button" width={200} height= 'auto' onClick={() => openChal('medium')}/>
+        <div className="chal-col">
+          <img src="/icons/Mid.gif" alt="Pixel Art" className="pixel-art-button" width={200} height='auto' onClick={() => openChal('medium')}/>
 
-          <div style = {{width: '100%', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
-            <form onSubmit={(event) => sendGuess(event, "medium", "guess_medium")} style={{width: '70%', marginRight: '10px'}}>
-              <input id = "guess_medium" placeholder="Paste Flag..." style ={{textAlign: 'center', width: '100%', color: 'white', backgroundColor: 'black', borderRadius: '5px', border: '0px', height: '20px', fontFamily: '"Jersey 15", sans-serif'}}/>
+          <div className="chal-input-row">
+            <form onSubmit={(event) => sendGuess(event, "medium", "guess_medium")} className="chal-form">
+              <input id="guess_medium" placeholder="Paste Flag..." className="chal-flag-input"/>
             </form>
-
-            <img src="/icons/EMed.gif" alt="Pixel Art" class="pixel-art-button" width={30} height= 'auto' onClick={(event) => sendGuess(event, "medium", "guess_medium")}/>
-          </div>
-          
-          <div style ={{height: '20%', width: '90%', textAlign: 'center', paddingTop: '10px'}}>
-            <t style = {{color: '#aa75ff'}}>Challenge Hint:</t> {descMed} <br></br> <br></br>
-            Grants  <t style = {{color: '#ff8c00'}}> +2 moves!</t>
+            <img src="/icons/EMed.gif" alt="Pixel Art" className="pixel-art-button" width={30} height='auto' onClick={(event) => sendGuess(event, "medium", "guess_medium")}/>
           </div>
 
+          <div className="chal-desc">
+            <t className="chal-hint-label">Challenge Hint:</t> {descMed} <br/><br/>
+            Grants <t className="moves-medium"> +2 moves!</t>
+          </div>
         </div>
 
-        <div style={{width: '33.33%', display: "flex",  alignItems: "center", flexDirection: 'column', paddingTop: '10px'}}> 
-          <img src="/icons/Hard2.gif" alt="Pixel Art" class="pixel-art-button" width={200} height= {125} onClick={() => openChal('hard')}/>
+        <div className="chal-col">
+          <img src="/icons/Hard2.gif" alt="Pixel Art" className="pixel-art-button" width={200} height={125} onClick={() => openChal('hard')}/>
 
-          <div style = {{width: '100%', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
-            <form onSubmit={(event) => sendGuess(event, "hard", "guess_hard")} style={{width: '70%', marginRight: '10px'}}>
-              <input id = "guess_hard" placeholder="Paste Flag..." style ={{textAlign: 'center', width: '100%', color: 'white', backgroundColor: 'black', borderRadius: '5px', border: '0px', height: '20px', fontFamily: '"Jersey 15", sans-serif'}}/>
+          <div className="chal-input-row">
+            <form onSubmit={(event) => sendGuess(event, "hard", "guess_hard")} className="chal-form">
+              <input id="guess_hard" placeholder="Paste Flag..." className="chal-flag-input"/>
             </form>
-            <img src="/icons/EHard.gif" alt="Pixel Art" class="pixel-art-button" width={30} height= 'auto' onClick={(event) => sendGuess(event, "hard", "guess_hard")}/>
+            <img src="/icons/EHard.gif" alt="Pixel Art" className="pixel-art-button" width={30} height='auto' onClick={(event) => sendGuess(event, "hard", "guess_hard")}/>
           </div>
 
-          <div style ={{height: '20%', width: '90%', textAlign: 'center', paddingTop: '10px'}}>
-            <t style = {{color: '#aa75ff'}}>Challenge Hint:</t> {descHard} <br></br> <br></br>
-            Grants  <t style = {{color: '#ff0037'}}> +3 moves!</t>
+          <div className="chal-desc">
+            <t className="chal-hint-label">Challenge Hint:</t> {descHard} <br/><br/>
+            Grants <t className="moves-hard"> +3 moves!</t>
           </div>
         </div>
       </div>
-        
+
     </main>
   );
 };

@@ -5,22 +5,19 @@ import {
   orderBy,
   onSnapshot,
   limit,
-  doc, 
+  doc,
   getDocs,
   getDoc
 } from "firebase/firestore";
 import { db, auth } from "../firebase";
 import User from "./User";
 
-
-
 const Leaderboard = () => {
-
 
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        
+
         const q = query(
         collection(db, "users"),
         // orderBy("createdAt", "desc"),
@@ -48,16 +45,15 @@ const Leaderboard = () => {
     }, []);
 
   return (
-    <main style={{ width: '100%', height: '100%', display: "flex", flexDirection: 'column'}}>
+    <main className="leaderboard-main">
 
 {/* overflowX: 'auto', overflowY: 'auto', whiteSpace: 'nowrap' */}
-      <div className="messages-wrapper"  style={{}}> 
+      <div className="messages-wrapper">
         {users?.map((user) => (
           <User key={user.id} user={user} />
         ))}
       </div>
-        
-        
+
     </main>
   );
 };

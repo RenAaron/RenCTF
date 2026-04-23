@@ -48,7 +48,7 @@ const Tutorial = () => {
             pointStyle: 'cross',
             pointRadius: 5,
             pointBorderColor: 'rgba(255, 0, 119, 1)',
-            backgroundColor: 'rgba(255, 0, 119, 0.25)',
+            backgroundColor: 'rgba(234, 0, 255, 0.3)',
             borderColor: 'rgba(255, 0, 119, 0.3)',
             borderDash: [5, 5],
             data: red_trace,
@@ -91,14 +91,14 @@ const Tutorial = () => {
   }, []);
 
   return (
-    <main style={{ width: '100%', height: '100%', display: "flex", alignItems: "center", flexDirection: 'column', overflow: 'hidden' }}>
-      <div style={{ height: '10%', width: '100%', alignItems: "center", display: "flex", justifyContent: 'center' }}>
-        <h2 style={{ fontSize: 50, marginRight: '10px' }}>Updates</h2>
+    <main className="tutorial-main">
+      <div className="section-header">
+        <h2 className="section-title">Updates</h2>
       </div>
 
       <canvas
         ref={chartRef}
-        style={{ width: '100%', maxWidth: '600px', color: 'white' }}
+        className="tutorial-chart"
       />
     </main>
   );

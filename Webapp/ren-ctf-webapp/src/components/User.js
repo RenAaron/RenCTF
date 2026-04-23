@@ -9,9 +9,9 @@ const colors = {
 
 const User = ({ user }) => {
   return (
-    <div style={{display: "flex", alignItems: 'center'}}>
+    <div className="user-row">
 
-        <t style={{color: colors[user.team[0]], fontSize: '19px'}}>
+        <t className="user-stat" style={{ color: colors[user.team[0]] }}>
             {"("}
             &nbsp;
             {user.total_moves}
@@ -20,20 +20,20 @@ const User = ({ user }) => {
             &nbsp;
         </t>
 
-        <t style={{fontSize: '19px'}}> {" -"} &nbsp;</t>
-            
-        <h2 style={{paddingRight: '2px', fontSize: '19px'}}>{user.display_name}</h2>
+        <t className="user-stat"> {" -"} &nbsp;</t>
+
+        <h2 className="user-display-name">{user.display_name}</h2>
 
         &nbsp;
 
         {user.comp_chal["easy"].length >= 1 && (
-            <div class="hover-container">
-                <t style={{color: '#00ff7b', fontSize: '19px'}}>E</t>
-                <div class="hover-text">
-                    <t style={{color: '#00aeff'}}>{user.display_name}</t>
+            <div className="hover-container">
+                <t className="user-stat color-green">E</t>
+                <div className="hover-text">
+                    <t className="color-blue">{user.display_name}</t>
                     &nbsp;
-                     has completed easy challenge{"(s)"}: 
-                    <t style={{color: '#00ff7b'}}> {user.comp_chal["easy"]} </t> 
+                     has completed easy challenge{"(s)"}:
+                    <t className="color-green"> {user.comp_chal["easy"]} </t>
                 </div>
             </div>
         )}
@@ -41,13 +41,13 @@ const User = ({ user }) => {
         &nbsp;
 
         {user.comp_chal["medium"].length >= 1 && (
-            <div class="hover-container">
-                <t style={{color: '#fc9003', fontSize: '19px'}}>M</t>
-                <div class="hover-text">
-                    <t style={{color: '#00aeff'}}>{user.display_name}</t>
+            <div className="hover-container">
+                <t className="user-stat color-orange">M</t>
+                <div className="hover-text">
+                    <t className="color-blue">{user.display_name}</t>
                     &nbsp;
-                    has completed medium challenge{"(s)"}: 
-                    <t style={{color: '#fc9003'}}> {user.comp_chal["medium"]} </t> 
+                    has completed medium challenge{"(s)"}:
+                    <t className="color-orange"> {user.comp_chal["medium"]} </t>
                 </div>
             </div>
         )}
@@ -55,13 +55,13 @@ const User = ({ user }) => {
         &nbsp;
 
         {user.comp_chal["hard"].length >= 1 && (
-            <div class="hover-container">
-                <t style={{color: '#ff1c77', fontSize: '19px'}}>H</t>
-                <div class="hover-text">
-                    <t style={{color: '#00aeff'}}>{user.display_name}</t>
+            <div className="hover-container">
+                <t className="user-stat color-pink">H</t>
+                <div className="hover-text">
+                    <t className="color-blue">{user.display_name}</t>
                     &nbsp;
-                    has completed easy challenge{"(s)"}: 
-                    <t style={{color: '#ff1c77'}}> {user.comp_chal["hard"]} </t> 
+                    has completed easy challenge{"(s)"}:
+                    <t className="color-pink"> {user.comp_chal["hard"]} </t>
                 </div>
             </div>
         )}

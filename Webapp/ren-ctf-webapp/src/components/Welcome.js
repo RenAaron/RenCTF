@@ -20,9 +20,9 @@ const Welcome = () => {
   return (
     <main className="welcome">
       <h1>Welcome to RenCTF</h1>
-      <img src="/icons/By.gif" alt="Pixel Art" class="pixel-art" width={500} height={380} />
-      <h1 style = {{marginBottom: 10}}>Sign in with Google to participate!</h1> 
-      <h2 style = {{color: "#ff6a00"}}>[ RIT emails only ]</h2>
+      <img src="/icons/By.gif" alt="Pixel Art" className="pixel-art" width={500} height={380} />
+      <h1>Sign in with Google to participate!</h1>
+      <h2 className="welcome-rit-notice">[ RIT emails only ]</h2>
       <button className="sign-in">
         <img
           onClick={googleSignIn}
