@@ -12,7 +12,6 @@ RenCTF is a web application/hardware project intended to teach STEM-related topi
 
 ### Developed using:
 - Firebase (Front-end Hosting & Database)
-- Angular (Front-end Framework)
 - Heroku (Back-end/server Hosting)
 - Blender (Webapp/Matrix GIFs & Rendering)
 - Fusion360 (Designing 3D-Printed Housing)
@@ -30,7 +29,6 @@ RenCTF is a web application/hardware project intended to teach STEM-related topi
 
 1. Make sure you have these installed:
    - Node.js and npm
-   - Angular CLI
    - Firebase CLI
    - Heroku CLI
 
