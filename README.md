@@ -1,6 +1,6 @@
 # RenCTF
 
-RenCTF is a web application/hardware project intended to teach STEM-related topics through an interactive & team-based medium. We have a webapp that lets users interface with a virtual game board that has an LED Matrix that plays gifs, displays the virtual gameboard, and user-rankings and stats! 
+RenCTF is a web application/hardware project intended to teach STEM-related topics through an interactive & team-based medium. RenCTF features a webapp that lets users compete in a virtual board game that syncs with hardware featuring an LED Matrix that plays gifs, displays the collective contributions of each team, and each user's rankings/stats!
 
 <p align="center">
   <img src="docs/RenCTF.png" alt="RenCTF Board" width="400"/>
