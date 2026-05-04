@@ -230,8 +230,6 @@ def showLead():
         time.sleep(5)
         cnt += 1
 
-        
-
 canvi = gifSetup()
 
 while 1:

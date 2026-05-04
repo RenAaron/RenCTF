@@ -14,7 +14,7 @@ class BoardConfigs(Enum):
 
 def clearGame(blue_score=0, red_score=0, red_trace=[], blue_trace=[]):
     """
-    
+    oops!
     """
 
     return 0
