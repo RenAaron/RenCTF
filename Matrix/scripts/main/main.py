@@ -35,25 +35,6 @@ colors = {
     "P": [graphics.Color(0, 0, 0), graphics.Color(217, 0, 255), "-"]
 }
 
-
-
-# # Example
-# if __name__ == "__main__":
-#     grid = [
-#         "WWWWBBBB",
-#         "WWWWPPPP",
-#         "WWWWRRRR",
-#         "WWWWBBBB",
-#         "WWWWPPPP",
-#         "WWWWRRRR",
-#         "WWWWBBBB",
-#         "WWWWPPPP",
-#     ]
-#     print("Wrote:", grid_to_gif(grid, out_path="grid.gif", circle_radius_px=2))
-
-
-
-
 def getDirs(dir):
     dir_list = os.listdir(dir)
     gifs = [f for f in dir_list if f.endswith('.gif')]
