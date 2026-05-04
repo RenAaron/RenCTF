@@ -13,7 +13,7 @@ import { db, auth } from "../firebase";
 import io from 'socket.io-client';
 import Leaderboard from "./Leaderboard"
 import Swal from 'sweetalert2'
-import Tutorial from "./Tutorial";
+import TeamTrace from "./TeamTrace";
 
 // const socket = io.connect("https://renctf-server-bbb0e859baa9.herokuapp.com/");
 const socket = io.connect("http://localhost:3001");

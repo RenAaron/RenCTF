@@ -77,6 +77,19 @@ const Tutorial = () => {
             color: 'white',
           },
         },
+        
+        scales: {
+          x: {
+            grid: {
+              display: true,
+            }
+          },
+          y: { 
+            grid: {
+              display: true,
+            }
+          }
+        }
       },
     });
   }, [red_trace, blue_trace]);
