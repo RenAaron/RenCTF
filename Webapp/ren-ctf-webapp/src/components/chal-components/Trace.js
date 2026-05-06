@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
 import { onSnapshot, doc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 
-const Tutorial = () => {
+const Trace = () => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
@@ -68,10 +68,11 @@ const Tutorial = () => {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
           title: {
-            display: true,
+            display: false,
             text: 'Red V. Blue Trace',
             font: { size: 16, family: '"Jersey 15", sans-serif' },
             color: 'white',
@@ -91,17 +92,13 @@ const Tutorial = () => {
   }, []);
 
   return (
-    <main className="tutorial-main">
-      <div className="section-header">
-        <h2 className="section-title">Updates</h2>
-      </div>
-
+    <div style={{ width: '100%', height: '100%' }}>
       <canvas
         ref={chartRef}
-        className="tutorial-chart"
+        className="trace-chart"
       />
-    </main>
+    </div>
   );
 };
 
-export default Tutorial;
+export default Trace;

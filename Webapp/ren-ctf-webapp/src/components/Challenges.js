@@ -13,66 +13,14 @@ import { db, auth } from "../firebase";
 import io from 'socket.io-client';
 import Leaderboard from "./Leaderboard"
 import Swal from 'sweetalert2'
-import Tutorial from "./Tutorial";
+import Grid from "./chal-components/Grid"
+import Trace from "./chal-components/Trace"
+import GameStats from "./chal-components/GameStats"
 
 // const socket = io.connect("https://renctf-server-bbb0e859baa9.herokuapp.com/");
 const socket = io.connect("http://localhost:3001");
 
 const keysCollectionRef = collection(db, "keys");
-
-const colors = {
-  W: '/icons/W.png',
-  P: '/icons/P.gif',
-  R: '/icons/Red.gif',
-  B: '/icons/Blue.gif'
-};
-
-const cellC = {
-  W: '1px dashed white',
-  R: '1px dashed #ff2200',
-  P: '1px dashed #a200ff',
-  B: '1px dashed #00aeff'
-}
-
-const Grid = ({ array, team, moves}) => {
-  const gridSize = array.length;
-
-  const placeCell = (rowIndex, cellIndex, team, moves) => {
-    if(moves > 0){
-      socket.emit("place_cell", {x: cellIndex, y: rowIndex, team: team[0], moves: moves, user: auth.currentUser});
-    } else{
-      Swal.fire({
-        icon: "warning",
-        title: "Out of moves!",
-        iconColor: "#fcba03",
-        color: '#fcba03',
-        background: 'black',
-        text: "You don't have any moves. Complete challenges or wait for new challenges to gain moves!",
-        showCloseButton: false,
-        confirmButtonColor: "#fcba03",
-        confirmButtonText: "Ok :)"
-      });
-    }
-  };
-
-  return (
-    <div className="grid-container" style={{ gridTemplateColumns: `repeat(${gridSize}, 35px)` }}>
-      {array.map((row, rowIndex) => (
-        row.split('').map((cell, cellIndex) => (
-          <img
-            onClick={() => placeCell(rowIndex, cellIndex, team, moves)}
-            key={`${rowIndex}-${cellIndex}`}
-            className="pixel-art grid-cell"
-            src={colors[cell] || "/icons/Q.gif"}
-            width={35}
-            height={35}
-            style={{ border: cellC[cell] }}
-          />
-        ))
-      ))}
-    </div>
-  );
-};
 
 const Challenges = () => {
 
@@ -158,6 +106,23 @@ const Challenges = () => {
   const [descMed, setdescMed] = useState();
   const [descHard, setdescHard] = useState();
 
+  const containerRef = useRef(null);
+  const [containerHeight, setContainerHeight] = useState(0);
+
+  useEffect(() => {
+    const element = containerRef.current;
+    if (!element) return;
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      setContainerHeight(entry.contentRect.height);
+    });
+    resizeObserver.observe(element);
+    return () => resizeObserver.disconnect();
+  }, []);
+
+  const cellSize = board.length > 0 && containerHeight > 0
+    ? Math.floor((containerHeight * 0.8) / board.length)
+    : 0;
+
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "games", "TIC-TAC-TOE"), (doc) => {
       setBoard(doc.data().board);
@@ -186,40 +151,25 @@ const Challenges = () => {
 
   return (
     <main className="chal-main">
-
-      <div className="section-header">
-        <h2 className="section-title">Challenges </h2>
-        <h2 className="chal-subtitle"> ( Week ? April )</h2>
-      </div>
-
       <div className="chal-board-section">
-        <div className="chal-leaderboard-box">
-          <h2 className="chal-leaderboard-title">Leaderboard</h2>
-          <div className="chal-leaderboard-scroll"><Leaderboard/></div>
+
+        <div
+          ref={containerRef}
+          style={{ display: 'flex', flexDirection: 'column', width: 'fit-content', alignSelf: 'stretch', margin: "30px" }}
+        >
+          {cellSize > 0 && <Grid array={board} cellSize={cellSize} team={team} moves={moves}/>}
+          {board.length > 0 && cellSize > 0 && (
+            <div style={{ flex: 1, minHeight: 0, marginTop: '10px'}}>
+              <Trace/>
+            </div>
+          )}
         </div>
-        <div className="chal-game-area">
 
-          <div className="chal-score-row">
-            <t className="team-label team-blue">
-              BLUE TEAM: <t className="text-white">&nbsp;{BlueScore}</t>
-              &nbsp;
-              {RedScore <= BlueScore && (
-                <img src="/icons/CBlue.gif" alt="Pixel Art" className="pixel-art" width={26} height={26}/>
-              )}
-            </t>
+        <GameStats/>
 
-            <t className="team-label team-red">
-              RED TEAM: <t className="text-white">&nbsp;{RedScore}</t>
-              &nbsp;
-              {RedScore >= BlueScore && (
-                <img src="/icons/CRed.gif" alt="Pixel Art" className="pixel-art" width={26} height={26}/>
-              )}
-            </t>
-          </div>
+        
 
-          <Grid array={board} team={team} moves={moves}/>
-
-          <div className="chal-moves-row">
+          {/* <div className="chal-moves-row">
 
             {team == "Red" && (
               <t className="team-label team-red">
@@ -247,60 +197,9 @@ const Challenges = () => {
 
           <div className="chal-multiplier">
             <t>CURRENT MULTIPLIER: </t>{multiplier}<t>x!</t>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
 
-        {/* <button onClick={sendMessage}>Hello</button> */}
-      </div>
-
-      <div className="chal-challenges-row">
-        <div className="chal-col">
-          <img src="/icons/Easy.gif" alt="Pixel Art" className="pixel-art-button" width={200} height='auto' onClick={() => openChal('easy')}/>
-
-          <div className="chal-input-row">
-            <form onSubmit={(event) => sendGuess(event, "easy", "guess_easy")} className="chal-form">
-              <input id="guess_easy" placeholder="Paste Flag..." className="chal-flag-input"/>
-            </form>
-            <img src="/icons/EEas.gif" alt="Pixel Art" className="pixel-art-button" width={30} height='auto' onClick={(event) => sendGuess(event, "easy", "guess_easy")}/>
-          </div>
-
-          <div className="chal-desc">
-            <t className="chal-hint-label">Challenge Hint:</t> {descEasy} <br/><br/>
-            Grants <t className="moves-easy"> +1 moves!</t>
-          </div>
-        </div>
-
-        <div className="chal-col">
-          <img src="/icons/Mid.gif" alt="Pixel Art" className="pixel-art-button" width={200} height='auto' onClick={() => openChal('medium')}/>
-
-          <div className="chal-input-row">
-            <form onSubmit={(event) => sendGuess(event, "medium", "guess_medium")} className="chal-form">
-              <input id="guess_medium" placeholder="Paste Flag..." className="chal-flag-input"/>
-            </form>
-            <img src="/icons/EMed.gif" alt="Pixel Art" className="pixel-art-button" width={30} height='auto' onClick={(event) => sendGuess(event, "medium", "guess_medium")}/>
-          </div>
-
-          <div className="chal-desc">
-            <t className="chal-hint-label">Challenge Hint:</t> {descMed} <br/><br/>
-            Grants <t className="moves-medium"> +2 moves!</t>
-          </div>
-        </div>
-
-        <div className="chal-col">
-          <img src="/icons/Hard2.gif" alt="Pixel Art" className="pixel-art-button" width={200} height={125} onClick={() => openChal('hard')}/>
-
-          <div className="chal-input-row">
-            <form onSubmit={(event) => sendGuess(event, "hard", "guess_hard")} className="chal-form">
-              <input id="guess_hard" placeholder="Paste Flag..." className="chal-flag-input"/>
-            </form>
-            <img src="/icons/EHard.gif" alt="Pixel Art" className="pixel-art-button" width={30} height='auto' onClick={(event) => sendGuess(event, "hard", "guess_hard")}/>
-          </div>
-
-          <div className="chal-desc">
-            <t className="chal-hint-label">Challenge Hint:</t> {descHard} <br/><br/>
-            Grants <t className="moves-hard"> +3 moves!</t>
-          </div>
-        </div>
       </div>
 
     </main>

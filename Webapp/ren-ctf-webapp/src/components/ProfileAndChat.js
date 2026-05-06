@@ -25,9 +25,9 @@ const ProfileAndChat = () => {
 
   return (
     <main className="activity-main">
-      <div className="section-header">
+      {/* <div className="section-header">
         <h2 className="section-title"> Activity </h2>
-      </div>
+      </div> */}
 
       <div className="section-body">
         <div className="tab">
