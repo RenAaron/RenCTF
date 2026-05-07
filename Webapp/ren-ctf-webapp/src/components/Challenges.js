@@ -17,6 +17,7 @@ import Grid from "./chal-components/Grid"
 import Trace from "./chal-components/Trace"
 import GameStats from "./chal-components/GameStats";
 import MoveInventory from "./chal-components/MoveInventory";
+import ChalPreview from "./chal-components/ChalPreview";
 
 
 // const socket = io.connect("https://renctf-server-bbb0e859baa9.herokuapp.com/");
@@ -153,11 +154,17 @@ const Challenges = () => {
 
   return (
     <main className="chal-main">
+
+      <div style={{ textAlign: 'center' }}>
+        <h1 style={{ margin: 0, fontSize: '3rem' }}>Season n ~ Week x!</h1>
+        <span style={{ fontSize: '1', opacity: 0.7 }}>click to see stats</span>
+      </div>
+
       <div className="chal-board-section">
 
         <div
           ref={containerRef}
-          style={{ display: 'flex', flexDirection: 'column', width: 'fit-content', alignSelf: 'stretch', margin: "5" }}
+          style={{ display: 'flex', flexDirection: 'column', width: 'fit-content', alignSelf: 'stretch', margin: "5px" }}
         >
           {cellSize > 0 && <Grid array={board} cellSize={cellSize} team={team} moves={moves}/>}
           {board.length > 0 && cellSize > 0 && (
@@ -170,9 +177,44 @@ const Challenges = () => {
 
         {/* <GameStats team={team} multiplier={multiplier} moves={moves} RedScore={RedScore} BlueScore={BlueScore}/> */}
         
-        <MoveInventory/>
-        {/* </div> */}
+        <MoveInventory  moves={moves} team={team}/>
 
+      </div>
+
+      <div className="chal-challenges-row">
+        <ChalPreview
+          diff="easy"
+          icon="/icons/Easy.gif"
+          submitIcon="/icons/EEas.gif"
+          inputId="guess_easy"
+          desc={descEasy}
+          movesClass="moves-easy"
+          movesCount={1}
+          onOpen={openChal}
+          onGuess={sendGuess}
+        />
+        <ChalPreview
+          diff="medium"
+          icon="/icons/Mid.gif"
+          submitIcon="/icons/EMed.gif"
+          inputId="guess_medium"
+          desc={descMed}
+          movesClass="moves-medium"
+          movesCount={2}
+          onOpen={openChal}
+          onGuess={sendGuess}
+        />
+        <ChalPreview
+          diff="hard"
+          icon="/icons/Hard2.gif"
+          submitIcon="/icons/EHard.gif"
+          inputId="guess_hard"
+          desc={descHard}
+          movesClass="moves-hard"
+          movesCount={3}
+          onOpen={openChal}
+          onGuess={sendGuess}
+        />
       </div>
 
     </main>
