@@ -13,7 +13,7 @@ const ChalPreview = ({ diff, icon, submitIcon, inputId, desc, movesClass, movesC
       </div>
 
       <div className="chal-desc">
-        <t className="chal-hint-label">Challenge Hint:</t> {desc} <br /><br />
+        <t className="chal-hint-label">Challenge Desc:</t> {desc} <br /><br />
         Grants <t className={movesClass}> +{movesCount} moves!</t>
       </div>
     </div>

@@ -16,6 +16,7 @@ const MoveInventory = ({moves, team}) => {
                 <InventoryItem type={'Skull'} count={0} icon={"Matrix"}/>
                 <InventoryItem type={'Skull'} count={0} icon={"Emerald"}/>
                 <InventoryItem type={'Skull'} count={0} icon={"Fire"}/>
+                <InventoryItem type={'Skull'} count={0} icon={"Diamond"}/>
             </div>
             
         </div>

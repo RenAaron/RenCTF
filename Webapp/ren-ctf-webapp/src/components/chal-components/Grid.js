@@ -5,18 +5,25 @@ import { db, auth } from "../../firebase";
 // const socket = io.connect("https://renctf-server-bbb0e859baa9.herokuapp.com/");
 const socket = io.connect("http://localhost:3001");
 
-const colors = {
+const cellIcon = {
   W: '/icons/W.png',
   P: '/icons/P.gif',
   R: '/icons/Red.gif',
   B: '/icons/Blue.gif'
 };
 
-const cellC = {
+const cellBorder = {
   W: '1px dashed #ffffff64',
   R: '1px dashed #ff2200',
   P: '1px dashed #a200ff',
   B: '1px dashed #00aeff'
+}
+
+const cellFill = {
+  W: '#00000000',
+  R: '#00000000',
+  P: '#00000000',
+  B: '#00000000'
 }
 
 const Grid = ({ array, team, moves, cellSize }) => {
@@ -48,10 +55,10 @@ const Grid = ({ array, team, moves, cellSize }) => {
             onClick={() => placeCell(rowIndex, cellIndex, team, moves)}
             key={`${rowIndex}-${cellIndex}`}
             className="pixel-art grid-cell"
-            src={colors[cell] || "/icons/Q.gif"}
+            src={cellIcon[cell] || "/icons/Q.gif"}
             width={cellSize}
             height={cellSize}
-            style={{ border: cellC[cell] }}
+            style={{ border: cellBorder[cell], backgroundColor: cellFill[cell] }}
           />
         ))
       ))}
