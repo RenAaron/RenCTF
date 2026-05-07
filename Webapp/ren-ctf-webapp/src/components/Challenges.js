@@ -15,7 +15,9 @@ import Leaderboard from "./Leaderboard"
 import Swal from 'sweetalert2'
 import Grid from "./chal-components/Grid"
 import Trace from "./chal-components/Trace"
-import GameStats from "./chal-components/GameStats"
+import GameStats from "./chal-components/GameStats";
+import MoveInventory from "./chal-components/MoveInventory";
+
 
 // const socket = io.connect("https://renctf-server-bbb0e859baa9.herokuapp.com/");
 const socket = io.connect("http://localhost:3001");
@@ -102,9 +104,9 @@ const Challenges = () => {
   const [moves, setMoves] = useState();
   const [team, setTeam] = useState();
 
-  const [descEasy, setdescEasy] = useState();
-  const [descMed, setdescMed] = useState();
-  const [descHard, setdescHard] = useState();
+  const [descEasy, setDescEasy] = useState();
+  const [descMed, setDescMed] = useState();
+  const [descHard, setDescHard] = useState();
 
   const containerRef = useRef(null);
   const [containerHeight, setContainerHeight] = useState(0);
@@ -120,7 +122,7 @@ const Challenges = () => {
   }, []);
 
   const cellSize = board.length > 0 && containerHeight > 0
-    ? Math.floor((containerHeight * 0.8) / board.length)
+    ? Math.floor((containerHeight * 0.7) / board.length)
     : 0;
 
   useEffect(() => {
@@ -137,15 +139,15 @@ const Challenges = () => {
     });
 
     const easySub = onSnapshot(doc(db, "flags", "easy"), (doc) => {
-      setdescEasy(doc.data().desc);
+      setDescEasy(doc.data().desc);
     });
 
     const medSub = onSnapshot(doc(db, "flags", "medium"), (doc) => {
-      setdescMed(doc.data().desc);
+      setDescMed(doc.data().desc);
     });
 
     const hardSub = onSnapshot(doc(db, "flags", "hard"), (doc) => {
-      setdescHard(doc.data().desc);
+      setDescHard(doc.data().desc);
     });
   }, []);
 
@@ -155,49 +157,20 @@ const Challenges = () => {
 
         <div
           ref={containerRef}
-          style={{ display: 'flex', flexDirection: 'column', width: 'fit-content', alignSelf: 'stretch', margin: "30px" }}
+          style={{ display: 'flex', flexDirection: 'column', width: 'fit-content', alignSelf: 'stretch', margin: "5" }}
         >
           {cellSize > 0 && <Grid array={board} cellSize={cellSize} team={team} moves={moves}/>}
           {board.length > 0 && cellSize > 0 && (
             <div style={{ flex: 1, minHeight: 0, marginTop: '10px'}}>
+              <GameStats team={team} multiplier={multiplier} moves={moves} RedScore={RedScore} BlueScore={BlueScore}/> 
               <Trace/>
             </div>
           )}
         </div>
 
-        <GameStats/>
-
+        {/* <GameStats team={team} multiplier={multiplier} moves={moves} RedScore={RedScore} BlueScore={BlueScore}/> */}
         
-
-          {/* <div className="chal-moves-row">
-
-            {team == "Red" && (
-              <t className="team-label team-red">
-                YOUR MOVES: &nbsp;<t className="text-white">{moves}</t>
-                &nbsp;
-                <img src="/icons/Red.gif" alt="Pixel Art" className="pixel-art" width={25} height={25}/>
-              </t>
-            )}
-
-            {team == "Blue" && (
-              <t className="team-label team-blue">
-                YOUR MOVES: &nbsp;<t className="text-white">{moves}</t>
-                &nbsp;
-                <img src="/icons/Blue.gif" alt="Pixel Art" className="pixel-art" width={25} height={25}/>
-              </t>
-            )}
-
-            {(team != "Blue" && team != "Red") && (
-              <t className="chal-warning">
-                USE YOUR RIT EMAIL! SIGN OUT AND SIGN BACK IN!
-              </t>
-            )}
-
-          </div>
-
-          <div className="chal-multiplier">
-            <t>CURRENT MULTIPLIER: </t>{multiplier}<t>x!</t>
-          </div> */}
+        <MoveInventory/>
         {/* </div> */}
 
       </div>

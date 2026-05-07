@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
-import { onSnapshot, doc } from "firebase/firestore";
-import { db } from "../../firebase";
+import { onSnapshot, doc } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 const Trace = () => {
   const chartRef = useRef(null);
@@ -47,9 +47,9 @@ const Trace = () => {
             tension: 0,
             pointStyle: 'cross',
             pointRadius: 5,
-            pointBorderColor: 'rgba(255, 0, 119, 1)',
-            backgroundColor: 'rgba(234, 0, 255, 0.3)',
-            borderColor: 'rgba(255, 0, 119, 0.3)',
+            pointBorderColor: '#ff0077',
+            backgroundColor: '#ea00ff4d',
+            borderColor: '#ff00774d',
             borderDash: [5, 5],
             data: red_trace,
           },
@@ -58,9 +58,9 @@ const Trace = () => {
             tension: 0,
             pointStyle: 'crossRot',
             pointRadius: 5,
-            pointBorderColor: 'rgb(0, 128, 255)',
-            backgroundColor: 'rgba(0, 89, 255, 0.3)',
-            borderColor: 'rgba(0, 89, 255, 0.3)',
+            pointBorderColor: '#0080ff',
+            backgroundColor: '#0059ff4d',
+            borderColor: '#0059ff4d',
             borderDash: [5, 5],
             data: blue_trace,
           },
@@ -78,6 +78,19 @@ const Trace = () => {
             color: 'white',
           },
         },
+
+        scales: {
+          y: {
+            grid: {
+              color: '#ffffff21', 
+            }
+          },
+          x: {
+            grid: {
+              color: '#ffffff21',
+            }
+          }
+        }
       },
     });
   }, [red_trace, blue_trace]);
@@ -92,11 +105,13 @@ const Trace = () => {
   }, []);
 
   return (
-    <div style={{ width: '100%', height: '100%' }}>
+    <div style={{ width: '100%', height: '70%' }}>
+
       <canvas
         ref={chartRef}
         className="trace-chart"
       />
+      
     </div>
   );
 };
