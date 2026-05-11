@@ -10,7 +10,7 @@ import {
   getDoc
 } from "firebase/firestore";
 import { db, auth } from "../firebase";
-import User from "./User";
+import User from "./leaderboard-components/UserCard";
 
 const Leaderboard = () => {
 

@@ -59,7 +59,7 @@ input {
 
 .messages-wrapper {
   padding: 1vh;
-  overflow: scroll;
+  overflow-y: scroll;
   width: 100%;
   margin-bottom: 1vh;
 }
@@ -141,11 +141,6 @@ input {
   margin-bottom: 0.5vh;
   font-size: clamp(0.8rem, 1.5vw, 1rem);
   color: #ffffff;
-}
-
-
-.user-message {
-  /* word-break: break-all; */
 }
 
 .message-time {
@@ -249,7 +244,6 @@ input {
 .section-left {
   width: 25vw; /* og 25 */ 
   overflow: scroll;
-  background-image: linear-gradient(rgb(0, 0, 0), rgb(0, 5, 90));
   transition: width 0.5s;
 }
 
@@ -265,7 +259,7 @@ input {
   /* cursor: pointer; */
 }
 .section-left:hover {
-  width: 40vw;
+  width: 40vw; /* og 40vw */
   /* cursor: pointer; */
 }
 .section-middle {
@@ -315,6 +309,7 @@ challenges {
 .hover-container {
   position: relative;
   display: inline-block;
+  z-index: 999;
 }
 
 .hover-text {
@@ -754,12 +749,6 @@ challenges {
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-/* ── User ───────────────────────────────────────────────────────── */
-.user-row {
-  display: flex;
-  align-items: center;
 }
 
 .user-stat {
