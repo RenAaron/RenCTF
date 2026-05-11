@@ -26,7 +26,7 @@ const User = ({ user }) => {
     return (
         <div style={{border: borderStyles[userTeam], margin: '10px', padding: '5px', backgroundColor: borderFill[userTeam], borderRadius: '10px'}}>
             <div style={{display: 'flex', alignItems: 'center', margin: '5px'}}>
-                <img style ={{width: '90px', marginRight: '10px'}} src="https://reptichip.com/cdn/shop/articles/Best_substrate_for_a_Red-eyed_tree_frog_Agalychnis_callidryas_ReptiChip_80942433-5f3f-4b05-865e-c6a8d49ad24b_600x.png?v=1755698331"></img>
+                <img style ={{width: '90px', marginRight: '10px'}} src=""></img>
                 <h1>{user.display_name}</h1>
 
                 <h2 style={{color: colors[userTeam]}}>&nbsp;({userTeam})</h2>
