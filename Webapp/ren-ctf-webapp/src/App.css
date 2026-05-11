@@ -244,6 +244,7 @@ input {
 .section-left {
   width: 25vw; /* og 25 */ 
   overflow: scroll;
+  background-image: linear-gradient(rgb(0, 0, 0), rgb(0, 3, 59));
   transition: width 0.5s;
 }
 

@@ -26,12 +26,12 @@ const User = ({ user }) => {
     function getRandomInt(min, max) {
         const minCeiled = Math.ceil(min);
         const maxFloored = Math.floor(max);
-        return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
+        return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
     }
     const userTeam = user.team;
 
     return (
-        <div style={{border: borderStyles[userTeam], margin: '10px', padding: '5px', backgroundColor: borderFill[userTeam], borderRadius: '5x'}}>
+        <div style={{border: borderStyles[userTeam], margin: '10px', padding: '5px', backgroundColor: borderFill[userTeam], borderRadius: '10px', overflowX: 'auto'}}>
             <div style={{display: 'flex', alignItems: 'center', margin: '5px'}}>
                 <img className="pixel-art" style ={{width: '120px', marginRight: '10px'}} src={`https://raw.githubusercontent.com/RenAaron/RenCTF/refs/heads/main/Webapp/ren-ctf-webapp/public/icons/pfps/face_${getRandomInt(1,10)}/${userTeam}.gif`}></img>
                 <h1>{user.display_name}</h1>
@@ -39,13 +39,13 @@ const User = ({ user }) => {
                 <h2 style={{color: colors[userTeam]}}>&nbsp;({userTeam})</h2>
             </div>
 
-            <hr style={{color: colors[userTeam], margin: '5px'}}/>
+            <hr style={{color: colors[userTeam], margin: '5px', opacity: '50%'}}/>
 
             <h2>
-                Season Score:  <t style={{color: colors['Purple']}}>{user.total_moves}</t>
+                Season Score:  <t style={{color: colors['Purple']}}>{user.total_moves} Pts.</t>
             </h2>
 
-            <hr style={{color: colors[userTeam], margin: '5px'}}/>
+            <hr style={{color: colors[userTeam], margin: '5px', opacity: '50%'}}/>
 
             <h2>
                 Completed:  
@@ -76,64 +76,8 @@ const User = ({ user }) => {
                 <img src={`/icons/Home.gif`} alt="Pixel Art" className="pixel-art" width={30} height={30}/>
                 <img src={`/icons/Emerald.gif`} alt="Pixel Art" className="pixel-art" width={30} height={30}/>
                 <img src={`/icons/Skull.gif`} alt="Pixel Art" className="pixel-art" width={30} height={30}/>
+                <img src={`/icons/parts.gif`} alt="Pixel Art" className="pixel-art" width={30} height={30}/>
             </h2>
-
-            
-
-            {/* <t className="user-stat" style={{ color: colors[user.team[0]] }}>
-                {"("}
-                &nbsp;
-                {user.total_moves}
-                &nbsp;
-                {" Pts. )"}
-                &nbsp;
-            </t>
-
-            <t className="user-stat"> {" -"} &nbsp;</t>
-
-            <h2 className="user-display-name">{user.display_name}</h2>
-
-            &nbsp;
-
-            {user.comp_chal["easy"].length >= 1 && (
-                <div className="hover-container">
-                    <t className="user-stat color-green">E</t>
-                    <div className="hover-text">
-                        <t className="color-blue">{user.display_name}</t>
-                        &nbsp;
-                        has completed easy challenge{"(s)"}:
-                        <t className="color-green"> {user.comp_chal["easy"]} </t>
-                    </div>
-                </div>
-            )}
-
-            &nbsp;
-
-            {user.comp_chal["medium"].length >= 1 && (
-                <div className="hover-container">
-                    <t className="user-stat color-orange">M</t>
-                    <div className="hover-text">
-                        <t className="color-blue">{user.display_name}</t>
-                        &nbsp;
-                        has completed medium challenge{"(s)"}:
-                        <t className="color-orange"> {user.comp_chal["medium"]} </t>
-                    </div>
-                </div>
-            )}
-
-            &nbsp;
-
-            {user.comp_chal["hard"].length >= 1 && (
-                <div className="hover-container">
-                    <t className="user-stat color-pink">H</t>
-                    <div className="hover-text">
-                        <t className="color-blue">{user.display_name}</t>
-                        &nbsp;
-                        has completed easy challenge{"(s)"}:
-                        <t className="color-pink"> {user.comp_chal["hard"]} </t>
-                    </div>
-                </div>
-            )} */}
         </div>
     );
 };

@@ -26,18 +26,14 @@ const Leaderboard = () => {
 
         const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
 
-        const fetchedUsers = [];
-
-        QuerySnapshot.forEach((doc) => {
-            fetchedUsers.push({ ...doc.data(), id: doc.id });
-        });
-
-        const sortedUsers = fetchedUsers.sort(
-            (a, b) => (b.total_moves) - (a.total_moves)
-        );
-
-        setUsers(fetchedUsers);
-
+          const fetchedUsers = [];
+          QuerySnapshot.forEach((doc) => {
+              fetchedUsers.push({ ...doc.data(), id: doc.id });
+          });
+          const sortedUsers = fetchedUsers.sort(
+              (a, b) => (b.total_moves) - (a.total_moves)
+          );
+          setUsers(fetchedUsers);
         });
 
         return () => unsubscribe;
@@ -47,7 +43,6 @@ const Leaderboard = () => {
   return (
     <main className="leaderboard-main">
 
-{/* overflowX: 'auto', overflowY: 'auto', whiteSpace: 'nowrap' */}
       <div className="messages-wrapper">
         {users?.map((user) => (
           <User key={user.id} user={user} />
