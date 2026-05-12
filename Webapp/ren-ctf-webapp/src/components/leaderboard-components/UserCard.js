@@ -33,10 +33,18 @@ const User = ({ user }) => {
     return (
         <div style={{border: borderStyles[userTeam], margin: '10px', padding: '5px', backgroundColor: borderFill[userTeam], borderRadius: '10px', overflowX: 'auto'}}>
             <div style={{display: 'flex', alignItems: 'center', margin: '5px'}}>
-                <img className="pixel-art" style ={{width: '120px', marginRight: '10px'}} src={`https://raw.githubusercontent.com/RenAaron/RenCTF/refs/heads/main/Webapp/ren-ctf-webapp/public/icons/pfps/face_${getRandomInt(1,10)}/${userTeam}.gif`}></img>
-                <h1>{user.display_name}</h1>
+                <img className="pixel-art" style ={{width: '120px', marginRight: '10px'}} src={`https://raw.githubusercontent.com/RenAaron/RenCTF/refs/heads/main/Webapp/ren-ctf-webapp/public/icons/pfps/face_${getRandomInt(1,11)}/${userTeam}.gif`}></img>
 
-                <h2 style={{color: colors[userTeam]}}>&nbsp;({userTeam})</h2>
+                <div style={{display: 'flex', margin: '5px', flexDirection: 'column'}}>
+                    <div style={{display: 'flex', alignItems: 'center', margin: '5px', flexDirection: 'row'}}>
+                        <h1>{user.display_name}</h1>
+                        <h2 style={{color: colors[userTeam]}}>&nbsp;({userTeam})</h2>
+                    </div>
+                    
+                    <div style={{display: 'flex', alignItems: 'center', margin: '5px'}}>
+                        <t style={{opacity: '50%'}}>ID: {user.id}</t>
+                    </div>
+                </div>
             </div>
 
             <hr style={{color: colors[userTeam], margin: '5px', opacity: '50%'}}/>
