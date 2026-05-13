@@ -4,26 +4,26 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import Welcome from "./components/Welcome";
 import Layout from "./components/Layout";
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
   const [user] = useAuthState(auth);
 
   return (
-    <div className="App">
-      <NavBar/>
-
-
-        <div>
-            {!user ? (
-              <Welcome />
-              ) : (
-              <>
-              <Layout />
-              </>
-            )}
+    <BrowserRouter>
+      <div className="App">
+        <NavBar/>
+          <div>
+              {!user ? (
+                <Welcome />
+                ) : (
+                <>
+                <Layout />
+                </>
+              )}
+          </div>
         </div>
-      </div>
-    // </div>
+    </BrowserRouter>
   );
 }
 

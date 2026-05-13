@@ -23,7 +23,7 @@ const ChallengeModal = ({}) => {
 
 
     return (
-        <div style={{backgroundColor: '#00000000', position: 'fixed', zIndex: 1, width: '100%', height: '100%', left: 0, top: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(5px)'}}>
+        <div style={{backgroundColor: '#00000000', position: 'fixed', zIndex: 1, width: '100%', height: '100%', left: 0, top: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(10px)'}}>
             <div style={{backgroundColor: '#000000f3', width: '50%', height: '70%', borderRadius: '20px', backdropFilter: 'blur(20px)', border: borderStyles['Easy'], padding: '20px'}}>
                 <h1 style={{fontSize: '70px', height: '10%'}}>
                     Challenge Title &nbsp;

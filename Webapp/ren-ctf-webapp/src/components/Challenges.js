@@ -19,6 +19,7 @@ import GameStats from "./chal-components/GameStats";
 import MoveInventory from "./chal-components/MoveInventory";
 import ChalPreview from "./chal-components/ChalPreview";
 import Modal from "./modal-components/ChallengeModal";
+import ChallengeModal from "./modal-components/ChallengeModal";
 
 
 // const socket = io.connect("https://renctf-server-bbb0e859baa9.herokuapp.com/");
@@ -157,7 +158,7 @@ const Challenges = () => {
     <main className="chal-main">
 
       <div style={{ textAlign: 'center' }}>
-        <h1 style={{ margin: 0, fontSize: '3rem' }}>Season n ~ Week x!</h1>
+        <h1 style={{fontSize: '3rem' }}>Season n ~ Week x!</h1>
         <span style={{ fontSize: '1', opacity: 0.7 }}>click to see stats</span>
       </div>
 
@@ -176,13 +177,11 @@ const Challenges = () => {
           )}
         </div>
 
-        {/* <GameStats team={team} multiplier={multiplier} moves={moves} RedScore={RedScore} BlueScore={BlueScore}/> */}
+        <ChallengeModal/>
         
         <MoveInventory  moves={moves} team={team}/>
 
       </div>
-
-      <Modal/>
 
       <div className="chal-challenges-row">
         <ChalPreview
