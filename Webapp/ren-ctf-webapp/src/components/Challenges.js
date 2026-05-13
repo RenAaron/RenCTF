@@ -18,8 +18,8 @@ import Trace from "./chal-components/Trace"
 import GameStats from "./chal-components/GameStats";
 import MoveInventory from "./chal-components/MoveInventory";
 import ChalPreview from "./chal-components/ChalPreview";
-import Modal from "./modal-components/ChallengeModal";
 import ChallengeModal from "./modal-components/ChallengeModal";
+import { useNavigate } from "react-router-dom";
 
 
 // const socket = io.connect("https://renctf-server-bbb0e859baa9.herokuapp.com/");
@@ -29,25 +29,15 @@ const keysCollectionRef = collection(db, "keys");
 
 const Challenges = () => {
 
+  const navigate = useNavigate();
+
   function openInNewTab(url) {
     var win = window.open(url, '_blank');
     win.focus();
   }
 
-  async function openChal(diff) {
-    try {
-      const docRef = doc(db, "flags", diff);
-      const docSnap = await getDoc(docRef);
-
-      if(docSnap.exists()){
-        openInNewTab(docSnap.data().link);
-      } else{
-        console.log("Could not find game", diff);
-      }
-
-    } catch (error) {
-      console.error("Error getting documents: ", error);
-    }
+  function openChal(diff) {
+    navigate("/challenges/yG1RIfpC0XYbmBZjMjsa");
   }
 
   const sendGuess = async (event, diff, id) => {
@@ -178,7 +168,7 @@ const Challenges = () => {
         </div>
 
         <ChallengeModal/>
-        
+
         <MoveInventory  moves={moves} team={team}/>
 
       </div>

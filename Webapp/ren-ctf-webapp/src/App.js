@@ -4,7 +4,7 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import Welcome from "./components/Welcome";
 import Layout from "./components/Layout";
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [user] = useAuthState(auth);
@@ -17,9 +17,10 @@ function App() {
               {!user ? (
                 <Welcome />
                 ) : (
-                <>
-                <Layout />
-                </>
+                <Routes>
+                  <Route path="/" element={<Layout />} />
+                  <Route path="challenges/:ctfId" element={<Layout />} />
+                </Routes>
               )}
           </div>
         </div>
