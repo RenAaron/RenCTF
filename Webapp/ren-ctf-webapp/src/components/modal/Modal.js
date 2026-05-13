@@ -21,7 +21,7 @@ const borderFill = {
     Blue: '#0059ff12'
 }
 
-const UserCard = ({ user }) => {
+const Modal = ({}) => {
 
     function getRandomInt(min, max) {
         const minCeiled = Math.ceil(min);
@@ -33,7 +33,7 @@ const UserCard = ({ user }) => {
     return (
         <div style={{border: borderStyles[userTeam], margin: '10px', padding: '5px', backgroundColor: borderFill[userTeam], borderRadius: '10px', overflowX: 'auto'}}>
             <div style={{display: 'flex', alignItems: 'center', margin: '5px'}}>
-                <img className="pixel-art" style ={{width: '120px', marginRight: '10px'}} src={`https://raw.githubusercontent.com/RenAaron/RenCTF/refs/heads/main/Webapp/ren-ctf-webapp/public/icons/pfps/face_${getRandomInt(1,17)}/${userTeam}.gif`}></img>
+                <img className="pixel-art" style ={{width: '120px', marginRight: '10px'}} src={`https://raw.githubusercontent.com/RenAaron/RenCTF/refs/heads/main/Webapp/ren-ctf-webapp/public/icons/pfps/face_${getRandomInt(1,12)}/${userTeam}.gif`}></img>
 
                 <div style={{display: 'flex', margin: '5px', flexDirection: 'column'}}>
                     <div style={{display: 'flex', alignItems: 'center', margin: '5px', flexDirection: 'row'}}>
@@ -90,4 +90,4 @@ const UserCard = ({ user }) => {
     );
 };
 
-export default UserCard;
+export default Modal;
