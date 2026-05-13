@@ -18,6 +18,7 @@ import Trace from "./chal-components/Trace"
 import GameStats from "./chal-components/GameStats";
 import MoveInventory from "./chal-components/MoveInventory";
 import ChalPreview from "./chal-components/ChalPreview";
+import Modal from "./modal-components/ChallengeModal";
 
 
 // const socket = io.connect("https://renctf-server-bbb0e859baa9.herokuapp.com/");
@@ -180,6 +181,8 @@ const Challenges = () => {
         <MoveInventory  moves={moves} team={team}/>
 
       </div>
+
+      <Modal/>
 
       <div className="chal-challenges-row">
         <ChalPreview
