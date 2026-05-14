@@ -13,12 +13,16 @@ const borderStyles = {
     Hard: '2px solid #ff006f',
     Medium: '2px solid #ffa600',
     Easy: '2px solid #77ff00',
+
+    Hard_d: '2px dashed #ff006f',
+    Medium_d: '2px dashed #ffa600',
+    Easy_d: '2px dashed #77ff00'
 }
 
 const fillColors = {
     Hard: '#ff00951f',
     Medium: '#ffbf001f',
-    Easy: '#00ff9512'
+    Easy: '#00ff661f'
 }
 
 const ChallengeModal = () => {
@@ -30,7 +34,7 @@ const ChallengeModal = () => {
     const [iconLink, setIconLink] = useState("");
     const [date, setDate] = useState("");
     const [badges, setBadges] = useState([]);
-
+    const [grant, setGrant] = useState([]);
 
     useEffect(() => {
         if (!ctfId) return;
@@ -43,7 +47,7 @@ const ChallengeModal = () => {
                 setIconLink(snap.data().icon_link);
                 setDate(snap.data().date_added);
                 setBadges(snap.data().badges);
-                
+                setGrant(snap.data().grant_count);
             } else {
                 console.log("Could not find ctf", ctfId);
             }
@@ -54,14 +58,14 @@ const ChallengeModal = () => {
 
     return (
         <div onClick={() => navigate("/")} style={{backgroundColor: '#00000000', position: 'fixed', zIndex: 1, width: '100%', height: '100%', left: 0, top: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(10px)'}}>
-            <div onClick={(e) => e.stopPropagation()} style={{backgroundColor: '#000000f3', width: '50%', height: '70%', borderRadius: '20px', backdropFilter: 'blur(20px)', border: borderStyles[difficulty], padding: '15px'}}>
+            <div onClick={(e) => e.stopPropagation()} style={{backgroundColor: '#000000f3', width: '50%', height: '70%', borderRadius: '20px', backdropFilter: 'blur(20px)', border: borderStyles[difficulty], padding: '30px'}}>
                 <div style={{fontSize: '3rem', height: '12%', margin: '5px'}}>
 
                     <div>
                         {title} - <t style={{color: colors[difficulty]}}>{difficulty}</t>
                     </div>
                     <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                        <t style={{fontSize: '1rem', opacity: '50%'}}> ID: {ctfId} - Date Added: {Date(date.seconds*1000)}</t> {/* fix this some day */}
+                        <t style={{fontSize: '1rem', opacity: '50%'}}> ID: {ctfId} - Date Added: {date?.seconds ? new Date(date.seconds * 1000).toLocaleString() : ""}</t>
                     </div>
                     
                     <hr style={{color: colors[difficulty], margin: '5px', opacity: '100%'}}/>
@@ -81,11 +85,23 @@ const ChallengeModal = () => {
                         </div>  
                     </div>
 
-                    <hr style={{color: colors[difficulty], margin: '20px', opacity: '100%'}}/>
+                    <hr style={{color: colors[difficulty], opacity: '100%', marginBottom: '20px', marginTop: '20px'}}/>
 
-                    <div style={{}}>
+                    <div style={{width: '30%', padding: '10px', borderRadius: '10px', paddingLeft: '10px', border: borderStyles[`${difficulty}_d`], backgroundColor: fillColors[difficulty]}}>
                         <h1>Challenge Rewards:</h1>
-                        {badges.map(badge => <h1>{badge}</h1>)}
+                        <hr style={{color: colors[difficulty], opacity: '50%', marginBottom: '10px', marginTop: '10px'}}/>
+
+                        <div style={{flexDirection: 'row', display: 'flex', alignItems: 'center', width: 'auto', margin: '10px'}}>
+                                {<img src={`/icons/Purple.gif`} alt="Pixel Art" className="pixel-art" width={40} height={40}/>}
+                                <h2> &nbsp; (+{grant}) Moves</h2>
+                        </div>
+                        
+                        {badges.map(badge =>
+                            <div style={{flexDirection: 'row', display: 'flex', alignItems: 'center', width: 'auto', margin: '10px'}}>
+                                {<img src={`/icons/badges/Emerald.gif`} alt="Pixel Art" className="pixel-art" width={40} height={40}/>}
+                                <h2> &nbsp; {badge} Badge</h2>
+                            </div>
+                        )}
                         
                     </div>
 
