@@ -42,6 +42,7 @@ const ChallengeModal = ({ onGuess }) => {
     const [badges, setBadges] = useState([]);
     const [grant, setGrant] = useState(0);
     const [guide, setGuide] = useState("");
+    const [download, setDownload] = useState("");
 
     useEffect(() => {
         if (!ctfId) return;
@@ -56,6 +57,7 @@ const ChallengeModal = ({ onGuess }) => {
                 setBadges(snap.data().badges);
                 setGrant(snap.data().grant_count);
                 setGuide(snap.data().guide_link);
+                setDownload(snap.data().download_link);
             } else {
                 console.log("Could not find ctf", ctfId);
             }
@@ -118,21 +120,30 @@ const ChallengeModal = ({ onGuess }) => {
                             )}
                         </div>
 
-                        <div style={{width: '70%', height: '20%', padding: '10px', borderRadius: '10px', paddingLeft: '10px', border: borderStyles[`${difficulty}_d`], backgroundColor: fillColors[difficulty]}}>
-                            <h1>Think you got the flag? SUBMIT HERE!!!</h1>
-                            <hr style={{color: colors[difficulty], opacity: '30%', marginBottom: '10px', marginTop: '10px'}}/>
-                            <div className="chal-input-row" style={{alignItems: 'center'}}>
-                                <form onSubmit={(event) => onGuess && onGuess(event, difficulty?.toLowerCase(), 'guess_modal')} className="chal-form"> {/* pls fix this garbage */}
-                                    <input id="guess_modal" placeholder="Paste Flag..." className="chal-flag-input" style={{padding: '14px 16px', fontSize: '1.25rem', width: '100%'}} />
-                                </form>
-                                <img
-                                    src={submitIcons[difficulty]}
-                                    alt="Submit"
-                                    className="pixel-art-button"
-                                    width={30}
-                                    height="auto"
-                                    onClick={(event) => onGuess && onGuess(event, difficulty?.toLowerCase(), 'guess_modal')}
-                                />
+                        <div style={{width: '70%', display: 'flex', flexDirection: 'column', gap: '15px'}}>
+                            <div
+                                onClick={() => download && window.open(download, '_blank')}
+                                style={{padding: '15px', borderRadius: '10px', border: borderStyles[`${difficulty}`], backgroundColor: fillColors[difficulty], cursor: download ? 'pointer' : 'default', textAlign: 'center', fontSize: '2rem'}}
+                            >
+                                Download Challenge Files
+                            </div>
+
+                            <div style={{padding: '10px', borderRadius: '10px', paddingLeft: '10px', border: borderStyles[`${difficulty}_d`], backgroundColor: fillColors[difficulty]}}>
+                                <h1>Think you got the flag? SUBMIT HERE!!!</h1>
+                                <hr style={{color: colors[difficulty], opacity: '30%', marginBottom: '10px', marginTop: '10px'}}/>
+                                <div className="chal-input-row" style={{alignItems: 'center'}}>
+                                    <form onSubmit={(event) => onGuess && onGuess(event, difficulty?.toLowerCase(), 'guess_modal')} className="chal-form"> {/* pls fix this garbage */}
+                                        <input id="guess_modal" placeholder="Paste Flag..." className="chal-flag-input" style={{padding: '14px 16px', fontSize: '1.25rem', width: '100%'}} />
+                                    </form>
+                                    <img
+                                        src={submitIcons[difficulty]}
+                                        alt="Submit"
+                                        className="pixel-art-button"
+                                        width={30}
+                                        height="auto"
+                                        onClick={(event) => onGuess && onGuess(event, difficulty?.toLowerCase(), 'guess_modal')}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
