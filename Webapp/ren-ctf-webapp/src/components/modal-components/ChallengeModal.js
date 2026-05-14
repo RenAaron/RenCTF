@@ -25,7 +25,13 @@ const fillColors = {
     Easy: '#00ff661f'
 }
 
-const ChallengeModal = () => {
+const submitIcons = {
+    Hard: '/icons/EHard.gif',
+    Medium: '/icons/EMed.gif',
+    Easy: '/icons/EEas.gif',
+}
+
+const ChallengeModal = ({ onGuess }) => {
     const { ctfId } = useParams();
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
@@ -34,7 +40,8 @@ const ChallengeModal = () => {
     const [iconLink, setIconLink] = useState("");
     const [date, setDate] = useState("");
     const [badges, setBadges] = useState([]);
-    const [grant, setGrant] = useState([]);
+    const [grant, setGrant] = useState(0);
+    const [guide, setGuide] = useState("");
 
     useEffect(() => {
         if (!ctfId) return;
@@ -48,6 +55,7 @@ const ChallengeModal = () => {
                 setDate(snap.data().date_added);
                 setBadges(snap.data().badges);
                 setGrant(snap.data().grant_count);
+                setGuide(snap.data().guide_link);
             } else {
                 console.log("Could not find ctf", ctfId);
             }
@@ -75,35 +83,63 @@ const ChallengeModal = () => {
                 <div style={{width: '100%', height: '88%'}}>
                     <div style={{display: 'flex', flexDirection: 'row', height: '50%', margin: '5px'}}>
                         <div style={{width: '40%', display: 'flex', justifyContent: 'center', padding: '5px'}}>
-                            {<img src={`${iconLink}`} alt="Pixel Art" className="pixel-art"/>}
+                            {<img src={`/icons/chal_icons/${iconLink}.gif`} alt="Pixel Art" className="pixel-art"/>}
                         </div>
 
-                        <div style={{width: '60%', margin: '5px', overflowY: 'auto'}}>
-                            <h1 style={{fontSize: '2rem', }}>Description/Hint</h1>
+                        <div style={{width: '60%', margin: '5px'}}>
+                            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'baseline', gap: '10px', height: '10%'}}>
+                                <h1 style={{fontSize: '2rem', margin: 0}}>Description/Hint</h1>
+                                {guide && (
+                                    <a href={guide} target="_blank" rel="noreferrer" style={{fontSize: '2rem', opacity: '50%', color: 'inherit'}}>(Guide)</a>
+                                )}
+                            </div>
                             <hr style={{color: colors[difficulty], margin: '5px', opacity: '30%'}}/>
-                            <h2>{description}</h2>
-                        </div>  
+                            <h2 style={{height: '90%', overflowY: 'auto'}}>{description}</h2>
+                        </div>
                     </div>
 
                     <hr style={{color: colors[difficulty], opacity: '100%', marginBottom: '20px', marginTop: '20px'}}/>
 
-                    <div style={{width: '30%', padding: '10px', borderRadius: '10px', paddingLeft: '10px', border: borderStyles[`${difficulty}_d`], backgroundColor: fillColors[difficulty]}}>
-                        <h1>Challenge Rewards:</h1>
-                        <hr style={{color: colors[difficulty], opacity: '50%', marginBottom: '10px', marginTop: '10px'}}/>
+                    <div style={{display: 'flex', gap: '20px'}}>
+                        <div style={{width: '30%', padding: '10px', borderRadius: '10px', paddingLeft: '10px', border: borderStyles[`${difficulty}_d`], backgroundColor: fillColors[difficulty]}}>
+                            <h1>Challenge Rewards</h1>
+                            <hr style={{color: colors[difficulty], opacity: '30%', marginBottom: '10px', marginTop: '10px'}}/>
 
-                        <div style={{flexDirection: 'row', display: 'flex', alignItems: 'center', width: 'auto', margin: '10px'}}>
-                                {<img src={`/icons/Purple.gif`} alt="Pixel Art" className="pixel-art" width={40} height={40}/>}
-                                <h2> &nbsp; (+{grant}) Moves</h2>
-                        </div>
-                        
-                        {badges.map(badge =>
                             <div style={{flexDirection: 'row', display: 'flex', alignItems: 'center', width: 'auto', margin: '10px'}}>
-                                {<img src={`/icons/badges/Emerald.gif`} alt="Pixel Art" className="pixel-art" width={40} height={40}/>}
-                                <h2> &nbsp; {badge} Badge</h2>
+                                    {<img src={`/icons/Purple.gif`} alt="Pixel Art" className="pixel-art" width={40} height={40}/>}
+                                    <h2> &nbsp; (+{grant}) Moves</h2>
                             </div>
-                        )}
-                        
+                            
+                            {badges.map(badge =>
+                                <div style={{flexDirection: 'row', display: 'flex', alignItems: 'center', width: 'auto', margin: '10px'}}>
+                                    {<img src={`/icons/badges/Emerald.gif`} alt="Pixel Art" className="pixel-art" width={40} height={40}/>}
+                                    <h2> &nbsp; {badge} Badge</h2>
+                                </div>
+                            )}
+                        </div>
+
+                        <div style={{width: '70%', height: '20%', padding: '10px', borderRadius: '10px', paddingLeft: '10px', border: borderStyles[`${difficulty}_d`], backgroundColor: fillColors[difficulty]}}>
+                            <h1>Think you got the flag? SUBMIT HERE!!!</h1>
+                            <hr style={{color: colors[difficulty], opacity: '30%', marginBottom: '10px', marginTop: '10px'}}/>
+                            <div className="chal-input-row" style={{alignItems: 'center'}}>
+                                <form onSubmit={(event) => onGuess && onGuess(event, difficulty?.toLowerCase(), 'guess_modal')} className="chal-form"> {/* pls fix this garbage */}
+                                    <input id="guess_modal" placeholder="Paste Flag..." className="chal-flag-input" style={{padding: '14px 16px', fontSize: '1.25rem', width: '100%'}} />
+                                </form>
+                                <img
+                                    src={submitIcons[difficulty]}
+                                    alt="Submit"
+                                    className="pixel-art-button"
+                                    width={30}
+                                    height="auto"
+                                    onClick={(event) => onGuess && onGuess(event, difficulty?.toLowerCase(), 'guess_modal')}
+                                />
+                            </div>
+                        </div>
                     </div>
+
+                    
+
+                    
 
                     {/* <hr style={{color: colors[difficulty], margin: '5px', opacity: '30%'}}/> */}
 

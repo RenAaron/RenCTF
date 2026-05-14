@@ -36,8 +36,17 @@ const Challenges = () => {
     win.focus();
   }
 
-  function openChal(diff) {
-    navigate("/challenges/yG1RIfpC0XYbmBZjMjsa");
+  async function openChal(diff) {
+    try {
+      const docSnap = await getDoc(doc(db, "flags", diff));
+      if (docSnap.exists()) {
+        navigate(`/challenges/${docSnap.data().ID}`);
+      } else {
+        console.log("Could not find flag doc", diff);
+      }
+    } catch (error) {
+      console.error("Error getting flag doc: ", error);
+    }
   }
 
   const sendGuess = async (event, diff, id) => {
@@ -131,17 +140,17 @@ const Challenges = () => {
       setTeam(doc.data().team)
     });
 
-    const easySub = onSnapshot(doc(db, "flags", "easy"), (doc) => {
-      setDescEasy(doc.data().desc);
-    });
+    const subscribeShortDesc = async (diff, setter) => {
+      const flagSnap = await getDoc(doc(db, "flags", diff));
+      if (!flagSnap.exists()) return;
+      onSnapshot(doc(db, "ctfs", flagSnap.data().ID), (ctfDoc) => {
+        setter(ctfDoc.data()?.short_desc);
+      });
+    };
 
-    const medSub = onSnapshot(doc(db, "flags", "medium"), (doc) => {
-      setDescMed(doc.data().desc);
-    });
-
-    const hardSub = onSnapshot(doc(db, "flags", "hard"), (doc) => {
-      setDescHard(doc.data().desc);
-    });
+    subscribeShortDesc("easy", setDescEasy);
+    subscribeShortDesc("medium", setDescMed);
+    subscribeShortDesc("hard", setDescHard);
   }, []);
 
   return (
@@ -167,7 +176,7 @@ const Challenges = () => {
           )}
         </div>
 
-        <ChallengeModal/>
+        <ChallengeModal onGuess={sendGuess}/>
 
         <MoveInventory  moves={moves} team={team}/>
 
