@@ -43,6 +43,11 @@ const ChallengeModal = ({ onGuess }) => {
     const [grant, setGrant] = useState(0);
     const [guide, setGuide] = useState("");
     const [download, setDownload] = useState("");
+    const [chalColor, setColor] = useState("");
+
+    const fillColor = `${chalColor}1f`; 
+    const solidBorder = `2px solid ${chalColor}`;
+    const dashedBorder = `2px dashed ${chalColor}`;
 
     useEffect(() => {
         if (!ctfId) return;
@@ -58,6 +63,7 @@ const ChallengeModal = ({ onGuess }) => {
                 setGrant(snap.data().grant_count);
                 setGuide(snap.data().guide_link);
                 setDownload(snap.data().download_link);
+                setColor(snap.data().color);
             } else {
                 console.log("Could not find ctf", ctfId);
             }
@@ -68,7 +74,7 @@ const ChallengeModal = ({ onGuess }) => {
 
     return (
         <div onClick={() => navigate("/")} style={{backgroundColor: '#00000000', position: 'fixed', zIndex: 1, width: '100%', height: '100%', left: 0, top: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(10px)'}}>
-            <div onClick={(e) => e.stopPropagation()} style={{backgroundColor: '#000000f3', width: '50%', height: '70%', borderRadius: '20px', backdropFilter: 'blur(20px)', border: borderStyles[difficulty], padding: '30px'}}>
+            <div onClick={(e) => e.stopPropagation()} style={{backgroundColor: '#000000f3', width: '50%', height: '80%', borderRadius: '20px', backdropFilter: 'blur(20px)', border: solidBorder, padding: '30px'}}>
                 <div style={{fontSize: '3rem', height: '12%', margin: '5px'}}>
 
                     <div>
@@ -78,7 +84,7 @@ const ChallengeModal = ({ onGuess }) => {
                         <t style={{fontSize: '1rem', opacity: '50%'}}> ID: {ctfId} - Date Added: {date?.seconds ? new Date(date.seconds * 1000).toLocaleString() : ""}</t>
                     </div>
                     
-                    <hr style={{color: colors[difficulty], margin: '5px', opacity: '100%'}}/>
+                    <hr style={{color: chalColor, margin: '5px', opacity: '100%'}}/>
                 </div>
                 
 
@@ -95,17 +101,17 @@ const ChallengeModal = ({ onGuess }) => {
                                     <a href={guide} target="_blank" rel="noreferrer" style={{fontSize: '2rem', opacity: '50%', color: 'inherit'}}>(Guide)</a>
                                 )}
                             </div>
-                            <hr style={{color: colors[difficulty], margin: '5px', opacity: '30%'}}/>
+                            <hr style={{color: chalColor, margin: '5px', opacity: '30%'}}/>
                             <h2 style={{height: '90%', overflowY: 'auto'}}>{description}</h2>
                         </div>
                     </div>
 
-                    <hr style={{color: colors[difficulty], opacity: '100%', marginBottom: '20px', marginTop: '20px'}}/>
+                    <hr style={{color: chalColor, opacity: '100%', marginBottom: '20px', marginTop: '20px'}}/>
 
                     <div style={{display: 'flex', gap: '20px'}}>
-                        <div style={{width: '30%', padding: '10px', borderRadius: '10px', paddingLeft: '10px', border: borderStyles[`${difficulty}_d`], backgroundColor: fillColors[difficulty]}}>
+                        <div style={{width: '30%', padding: '10px', borderRadius: '10px', paddingLeft: '10px', border: dashedBorder, backgroundColor: fillColor}}>
                             <h1>Challenge Rewards</h1>
-                            <hr style={{color: colors[difficulty], opacity: '30%', marginBottom: '10px', marginTop: '10px'}}/>
+                            <hr style={{color: chalColor, opacity: '30%', marginBottom: '10px', marginTop: '10px'}}/>
 
                             <div style={{flexDirection: 'row', display: 'flex', alignItems: 'center', width: 'auto', margin: '10px'}}>
                                     {<img src={`/icons/Purple.gif`} alt="Pixel Art" className="pixel-art" width={40} height={40}/>}
@@ -114,7 +120,7 @@ const ChallengeModal = ({ onGuess }) => {
                             
                             {badges.map(badge =>
                                 <div style={{flexDirection: 'row', display: 'flex', alignItems: 'center', width: 'auto', margin: '10px'}}>
-                                    {<img src={`/icons/badges/Emerald.gif`} alt="Pixel Art" className="pixel-art" width={40} height={40}/>}
+                                    {<img src={`/icons/badges/${badge}.gif`} alt="Pixel Art" className="pixel-art" width={40} height={40}/>}
                                     <h2> &nbsp; {badge} Badge</h2>
                                 </div>
                             )}
@@ -123,26 +129,18 @@ const ChallengeModal = ({ onGuess }) => {
                         <div style={{width: '70%', display: 'flex', flexDirection: 'column', gap: '15px'}}>
                             <div
                                 onClick={() => download && window.open(download, '_blank')}
-                                style={{padding: '15px', borderRadius: '10px', border: borderStyles[`${difficulty}`], backgroundColor: fillColors[difficulty], cursor: download ? 'pointer' : 'default', textAlign: 'center', fontSize: '2rem'}}
+                                style={{padding: '15px', borderRadius: '10px', border: solidBorder, backgroundColor: fillColor, cursor: download ? 'pointer' : 'default', textAlign: 'center', fontSize: '2rem'}}
                             >
                                 Download Challenge Files
                             </div>
 
-                            <div style={{padding: '10px', borderRadius: '10px', paddingLeft: '10px', border: borderStyles[`${difficulty}_d`], backgroundColor: fillColors[difficulty]}}>
+                            <div style={{padding: '10px', borderRadius: '10px', paddingLeft: '10px', border: dashedBorder, backgroundColor: fillColor}}>
                                 <h1>Think you got the flag? SUBMIT HERE!!!</h1>
-                                <hr style={{color: colors[difficulty], opacity: '30%', marginBottom: '10px', marginTop: '10px'}}/>
+                                <hr style={{color: chalColor, opacity: '30%', marginBottom: '10px', marginTop: '10px'}}/>
                                 <div className="chal-input-row" style={{alignItems: 'center'}}>
                                     <form onSubmit={(event) => onGuess && onGuess(event, difficulty?.toLowerCase(), 'guess_modal')} className="chal-form"> {/* pls fix this garbage */}
                                         <input id="guess_modal" placeholder="Paste Flag..." className="chal-flag-input" style={{padding: '14px 16px', fontSize: '1.25rem', width: '100%'}} />
                                     </form>
-                                    <img
-                                        src={submitIcons[difficulty]}
-                                        alt="Submit"
-                                        className="pixel-art-button"
-                                        width={30}
-                                        height="auto"
-                                        onClick={(event) => onGuess && onGuess(event, difficulty?.toLowerCase(), 'guess_modal')}
-                                    />
                                 </div>
                             </div>
                         </div>
